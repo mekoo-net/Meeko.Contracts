@@ -1,5 +1,11 @@
 <Project>
 
+  <!-- 作为 submodule 嵌入 meeko-platform 时，不继承上层 Directory.Build.props -->
+  <PropertyGroup>
+    <ImportDirectoryBuildProps>false</ImportDirectoryBuildProps>
+    <ImportDirectoryBuildTargets>false</ImportDirectoryBuildTargets>
+  </PropertyGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
