@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/lib/">
+    <Project Path="lib/Meeko.Common.Web/Meeko.Common.Web.csproj" />
+  </Folder>
+  <Project Path="Meeko.Contracts.csproj" />
+</Solution>

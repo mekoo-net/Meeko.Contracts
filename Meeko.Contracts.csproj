@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Meeko cross-service contracts: MagicOnion service interfaces + MessagePack DTOs. Server and client must reference the same version.</Description>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="lib\Meeko.Common.Web\Meeko.Common.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MagicOnion.Abstractions" />
+    <PackageReference Include="MessagePack" />
+  </ItemGroup>
+
+</Project>
