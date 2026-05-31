@@ -17,7 +17,4 @@ public sealed class PingResponse
 
     [Key(3)]
     public string? CallerUserId { get; set; }
-
-    [Key(4)]
-    public string? CallerTenantId { get; set; }
 }
