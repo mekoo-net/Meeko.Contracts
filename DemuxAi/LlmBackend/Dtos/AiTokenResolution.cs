@@ -3,7 +3,6 @@ using MessagePack;
 
 namespace Meeko.Contracts.DemuxAi.LlmBackend;
 
-// Key 序号必须与 DemuxAi.Gateway/Rpc/Contracts/LlmBackend/Dtos.cs 严格一致，改一边记得改另一边。
 [MessagePackObject]
 public sealed class AiTokenResolution
 {
