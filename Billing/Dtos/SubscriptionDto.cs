@@ -28,4 +28,5 @@ public sealed class SubscriptionDto
     [Key(9)] public bool AutoRenew { get; set; }
     [Key(10)] public bool CancelAtPeriodEnd { get; set; }
     [Key(11)] public DateTime CreatedAtUtc { get; set; }
+    [Key(12)] public string? SerialNo { get; set; }
 }

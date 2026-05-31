@@ -11,7 +11,7 @@ public interface IBillingBillAdminService : IService<IBillingBillAdminService>
 {
     UnaryResult<ListBillsResult> ListBillsAsync(ListBillsQuery query);
 
-    UnaryResult<BillDto?> GetBillAsync(long billUid);
+    UnaryResult<BillDto?> GetBillBySerialAsync(string billSerial);
 
     UnaryResult<ReverseBillResult> ReverseBillAsync(ReverseBillCommand cmd);
 }

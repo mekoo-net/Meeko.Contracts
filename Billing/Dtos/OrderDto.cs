@@ -29,4 +29,5 @@ public sealed class OrderDto
     [Key(9)] public DateTime CreatedAtUtc { get; set; }
     [Key(10)] public DateTime? ActivatedAtUtc { get; set; }
     [Key(11)] public DateTime? TerminatedAtUtc { get; set; }
+    [Key(12)] public string? SerialNo { get; set; }
 }

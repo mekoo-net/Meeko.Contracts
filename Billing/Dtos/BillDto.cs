@@ -5,7 +5,7 @@ namespace Meeko.Contracts.Billing;
 [MessagePackObject]
 public sealed class BillDto
 {
-    /// <summary>对外形如 "BL-900000001"。</summary>
+    /// <summary>对外形如 "BL20260531000001234"（前缀 + UTC 日期 + 9 位序列）。</summary>
     [Key(0)] public required string Id { get; set; }
 
     [Key(1)] public required BillOwnerInfo Owner { get; set; }
