@@ -195,6 +195,16 @@ public sealed class LogBillDto
     [Key(2)] public LogBillReversalDto? Reversal { get; set; }
 }
 
+[MessagePackObject]
+public sealed class LogTokenDto
+{
+    [Key(0)]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Meeko.Common.Web.LongToStringConverter))]
+    public long Id { get; set; }
+
+    [Key(1)] public string Name { get; set; } = string.Empty;
+}
+
 /// <summary>Admin 日志行（嵌套折叠形，对齐 console docs 11-demuxai-logs.md LogEntry）。</summary>
 [MessagePackObject]
 public sealed class AiUsageLogDto
@@ -218,6 +228,8 @@ public sealed class AiUsageLogDto
     [Key(13)] public object Usage { get; set; } = new LogUsageDto();
     [Key(14)] public object Cost { get; set; } = new LogCostDto();
     [Key(15)] public LogBillDto? Bill { get; set; }
+    /// <summary>sk- 令牌快照；PG 直发（无令牌）时为 null。</summary>
+    [Key(16)] public LogTokenDto? Token { get; set; }
 }
 
 [MessagePackObject]
