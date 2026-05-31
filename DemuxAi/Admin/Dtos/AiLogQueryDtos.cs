@@ -12,6 +12,10 @@ public sealed class LogAccountDto
     [Key(1)]
     [System.Text.Json.Serialization.JsonConverter(typeof(Meeko.Common.Web.NullableLongToStringConverter))]
     public long? IamUserUid { get; set; }
+
+    [Key(2)] public string? DisplayName { get; set; }
+    [Key(3)] public string? Email { get; set; }
+    [Key(4)] public string? Phone { get; set; }
 }
 
 [MessagePackObject]
