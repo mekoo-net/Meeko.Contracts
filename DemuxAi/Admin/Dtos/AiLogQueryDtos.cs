@@ -80,6 +80,97 @@ public sealed class LogCostDto
 }
 
 [MessagePackObject]
+public sealed class LogPerCallUsageDto
+{
+    [Key(0)] public int Calls { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerCallCostDto
+{
+    [Key(0)] public decimal PricePerCall { get; set; }
+    [Key(1)] public decimal CachedPricePerCall { get; set; }
+    [Key(2)] public decimal MultiplierSnapshot { get; set; }
+    [Key(3)] public decimal TierSnapshot { get; set; }
+    [Key(4)] public decimal Total { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerImageUsageTierDto
+{
+    [Key(0)] public string Size { get; set; } = string.Empty;
+    [Key(1)] public string Quality { get; set; } = string.Empty;
+}
+
+[MessagePackObject]
+public sealed class LogPerImageUsageDto
+{
+    [Key(0)] public LogPerImageUsageTierDto Tier { get; set; } = new();
+    [Key(1)] public int Count { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerImageCostDto
+{
+    [Key(0)] public decimal PricePerImage { get; set; }
+    [Key(1)] public decimal MultiplierSnapshot { get; set; }
+    [Key(2)] public decimal TierSnapshot { get; set; }
+    [Key(3)] public decimal Total { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerVideoUsageTierDto
+{
+    [Key(0)] public string Resolution { get; set; } = string.Empty;
+}
+
+[MessagePackObject]
+public sealed class LogPerVideoUsageDto
+{
+    [Key(0)] public LogPerVideoUsageTierDto Tier { get; set; } = new();
+    [Key(1)] public decimal Seconds { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerVideoCostDto
+{
+    [Key(0)] public decimal PricePerSecond { get; set; }
+    [Key(1)] public decimal MultiplierSnapshot { get; set; }
+    [Key(2)] public decimal TierSnapshot { get; set; }
+    [Key(3)] public decimal Total { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerAudioMinuteUsageDto
+{
+    [Key(0)] public decimal Minutes { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerAudioMinuteCostDto
+{
+    [Key(0)] public decimal PricePerMinute { get; set; }
+    [Key(1)] public decimal MultiplierSnapshot { get; set; }
+    [Key(2)] public decimal TierSnapshot { get; set; }
+    [Key(3)] public decimal Total { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerCharacterUsageDto
+{
+    [Key(0)] public int Characters { get; set; }
+}
+
+[MessagePackObject]
+public sealed class LogPerCharacterCostDto
+{
+    [Key(0)] public decimal PricePerKChar { get; set; }
+    [Key(1)] public decimal MultiplierSnapshot { get; set; }
+    [Key(2)] public decimal TierSnapshot { get; set; }
+    [Key(3)] public decimal Total { get; set; }
+}
+
+[MessagePackObject]
 public sealed class LogErrorDto
 {
     [Key(0)] public string? Code { get; set; }
@@ -88,13 +179,20 @@ public sealed class LogErrorDto
 }
 
 [MessagePackObject]
+public sealed class LogBillReversalDto
+{
+    [Key(0)] public DateTime AtUtc { get; set; }
+    [Key(1)] public string? By { get; set; }
+    [Key(2)] public string? Code { get; set; }
+    [Key(3)] public string? Remark { get; set; }
+}
+
+[MessagePackObject]
 public sealed class LogBillDto
 {
     [Key(0)] public string? Id { get; set; }
     [Key(1)] public string? Status { get; set; }
-    [Key(2)] public DateTime? ReversedAtUtc { get; set; }
-    [Key(3)] public string? ReversedBy { get; set; }
-    [Key(4)] public string? ReversedCode { get; set; }
+    [Key(2)] public LogBillReversalDto? Reversal { get; set; }
 }
 
 /// <summary>Admin 日志行（嵌套折叠形，对齐 console docs 11-demuxai-logs.md LogEntry）。</summary>
@@ -117,8 +215,8 @@ public sealed class AiUsageLogDto
     [Key(10)] public bool Success { get; set; }
     [Key(11)] public LogErrorDto? Error { get; set; }
     [Key(12)] public string BillingType { get; set; } = string.Empty;
-    [Key(13)] public LogUsageDto Usage { get; set; } = new();
-    [Key(14)] public LogCostDto Cost { get; set; } = new();
+    [Key(13)] public object Usage { get; set; } = new LogUsageDto();
+    [Key(14)] public object Cost { get; set; } = new LogCostDto();
     [Key(15)] public LogBillDto? Bill { get; set; }
 }
 
