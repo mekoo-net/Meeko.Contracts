@@ -27,4 +27,6 @@ public sealed class CommitQuotaCommand
     [Key(15)] public long? IamUserUid { get; set; }
     [Key(16)] public string? ErrorCode { get; set; }
     [Key(17)] public string? ErrorMessage { get; set; }
+    /// <summary>W3C trace id（32 位十六进制）。把这条计费记录关联回网关请求的分布式 trace。</summary>
+    [Key(18)] public string? TraceId { get; set; }
 }
