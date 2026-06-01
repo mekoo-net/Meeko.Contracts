@@ -230,10 +230,10 @@ public sealed class AiUsageLogDto
     [Key(15)] public LogBillDto? Bill { get; set; }
     /// <summary>sk- 令牌快照；PG 直发（无令牌）时为 null。</summary>
     [Key(16)] public LogTokenDto? Token { get; set; }
-    /// <summary>请求命中的渠道（供应商组）。来自定价快照绑定，历史不丢。</summary>
-    [Key(17)] public string? ChannelKey { get; set; }
-    /// <summary>请求命中的上游真实模型名。来自定价快照绑定，历史不丢。</summary>
-    [Key(18)] public string? UpstreamModelId { get; set; }
+    /// <summary>请求命中的供应商（供应商组）。来自定价快照绑定，历史不丢。</summary>
+    [Key(17)] public string? VendorKey { get; set; }
+    /// <summary>请求命中的上游真实模型名（vendor_model）。来自别名快照绑定，历史不丢。</summary>
+    [Key(18)] public string? VendorModel { get; set; }
 }
 
 [MessagePackObject]
@@ -254,8 +254,8 @@ public sealed class ListAiLogsQuery
     /// <summary>仅返回失败行（Success=false）；与 Status 可叠加。</summary>
     [Key(12)] public bool? ErrorOnly { get; set; }
     [Key(13)] public string? ErrorCode { get; set; }
-    /// <summary>按渠道（供应商组）过滤；匹配定价快照绑定的 channel_key。</summary>
-    [Key(14)] public string? ChannelKey { get; set; }
+    /// <summary>按供应商（供应商组）过滤；匹配定价快照绑定的 vendor_key。</summary>
+    [Key(14)] public string? VendorKey { get; set; }
 }
 
 [MessagePackObject]
@@ -285,28 +285,28 @@ public sealed class AiLogStatQuery
     [Key(4)] public DateTime ToUtc { get; set; }
 }
 
-/// <summary>按渠道（供应商组）聚合的消费统计行。</summary>
+/// <summary>按供应商（供应商组）聚合的消费统计行。</summary>
 [MessagePackObject]
-public sealed class AiChannelStatDto
+public sealed class AiVendorStatDto
 {
-    [Key(0)] public string ChannelKey { get; set; } = string.Empty;
+    [Key(0)] public string VendorKey { get; set; } = string.Empty;
     [Key(1)] public int RequestCount { get; set; }
     [Key(2)] public long TotalPromptTokens { get; set; }
     [Key(3)] public long TotalCompletionTokens { get; set; }
     [Key(4)] public decimal TotalQuota { get; set; }
-    /// <summary>该渠道下出现过的上游真实模型数（去重）。</summary>
+    /// <summary>该供应商下出现过的上游真实模型数（去重）。</summary>
     [Key(5)] public int UpstreamModelCount { get; set; }
 }
 
 [MessagePackObject]
-public sealed class AiChannelStatQuery
+public sealed class AiVendorStatQuery
 {
     [Key(0)] public DateTime FromUtc { get; set; }
     [Key(1)] public DateTime ToUtc { get; set; }
     [Key(2)] public long? AccountUid { get; set; }
     [Key(3)] public long? TokenId { get; set; }
-    /// <summary>仅统计指定渠道；空 = 全部渠道。</summary>
-    [Key(4)] public string? ChannelKey { get; set; }
+    /// <summary>仅统计指定供应商；空 = 全部供应商。</summary>
+    [Key(4)] public string? VendorKey { get; set; }
 }
 
 [MessagePackObject]

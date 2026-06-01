@@ -8,7 +8,7 @@ public interface IAiLogQueryService : IService<IAiLogQueryService>
     UnaryResult<ListAiLogsResult> ListAsync(ListAiLogsQuery query);
     UnaryResult<AiUsageLogDto?> GetAsync(long id);
     UnaryResult<AiLogStatDto[]> StatDailyAsync(AiLogStatQuery query);
-    UnaryResult<AiChannelStatDto[]> StatByChannelAsync(AiChannelStatQuery query);
+    UnaryResult<AiVendorStatDto[]> StatByVendorAsync(AiVendorStatQuery query);
 
     UnaryResult<ReverseAiLogResult> ReverseAsync(ReverseAiLogCommand cmd);
 }

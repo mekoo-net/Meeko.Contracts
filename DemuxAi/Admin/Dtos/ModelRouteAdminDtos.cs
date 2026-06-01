@@ -7,8 +7,8 @@ public sealed class ModelRouteDto
 {
     [Key(0)] public long Uid { get; set; }
     [Key(1)] public string Alias { get; set; } = string.Empty;
-    [Key(2)] public string ChannelKey { get; set; } = string.Empty;
-    [Key(3)] public string UpstreamModelId { get; set; } = string.Empty;
+    [Key(2)] public string VendorKey { get; set; } = string.Empty;
+    [Key(3)] public string VendorModel { get; set; } = string.Empty;
     [Key(4)] public int Weight { get; set; }
     [Key(5)] public int Priority { get; set; }
     [Key(6)] public string Status { get; set; } = "enabled";
@@ -21,8 +21,8 @@ public sealed class ModelRouteDto
 public sealed class ModelRouteWritePayload
 {
     [Key(0)] public string Alias { get; set; } = string.Empty;
-    [Key(1)] public string ChannelKey { get; set; } = string.Empty;
-    [Key(2)] public string UpstreamModelId { get; set; } = string.Empty;
+    [Key(1)] public string VendorKey { get; set; } = string.Empty;
+    [Key(2)] public string VendorModel { get; set; } = string.Empty;
     [Key(3)] public int? Weight { get; set; }
     [Key(4)] public int? Priority { get; set; }
     [Key(5)] public string? Status { get; set; }
