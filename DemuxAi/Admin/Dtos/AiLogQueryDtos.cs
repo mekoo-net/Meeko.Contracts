@@ -271,14 +271,27 @@ public sealed class ListAiLogsResult
     [Key(1)] public int Total { get; set; }
 }
 
+/// <summary>
+/// 时间序列分桶聚合行（按查询跨度自适应桶宽：≤48h 按小时，否则按天）。
+/// 每个桶含成功 / 失败计数，便于前端绘制成功+失败叠加趋势。
+/// </summary>
 [MessagePackObject]
 public sealed class AiLogStatDto
 {
-    [Key(0)] public DateTime DateUtc { get; set; }
+    /// <summary>桶起点（Unix 毫秒 UTC）。桶宽见 <see cref="BucketSeconds"/>。</summary>
+    [Key(0)] public DateTime BucketStartUtc { get; set; }
+    /// <summary>该桶总调用数（成功 + 失败）。</summary>
     [Key(1)] public int RequestCount { get; set; }
+    /// <summary>成功调用累计输入 token。</summary>
     [Key(2)] public long TotalPromptTokens { get; set; }
+    /// <summary>成功调用累计输出 token。</summary>
     [Key(3)] public long TotalCompletionTokens { get; set; }
+    /// <summary>成功调用累计扣费（元）。</summary>
     [Key(4)] public decimal TotalQuota { get; set; }
+    /// <summary>该桶失败调用数（Status != Success）。</summary>
+    [Key(5)] public int ErrorCount { get; set; }
+    /// <summary>桶宽（秒）：3600=按小时，86400=按天。前端据此格式化横轴刻度。</summary>
+    [Key(6)] public int BucketSeconds { get; set; }
 }
 
 [MessagePackObject]
