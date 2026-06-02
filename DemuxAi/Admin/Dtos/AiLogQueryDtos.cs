@@ -82,7 +82,13 @@ public sealed class LogCostDto
 [MessagePackObject]
 public sealed class LogPerCallUsageDto
 {
-    [Key(0)] public int Calls { get; set; }
+    /// <summary>
+    /// 按次计费的调用同样会消耗 token（如 function call / moderation 仍是 LLM 调用），
+    /// 仅记录上游回报的输入 / 输出 / 缓存 token 原始明细，供观测 / 对账，
+    /// 不参与计费（计费走 <see cref="LogPerCallCostDto.PricePerCall"/>）。
+    /// </summary>
+    [Key(0)] public LogUsageInputDto Input { get; set; } = new();
+    [Key(1)] public LogUsageOutputDto Output { get; set; } = new();
 }
 
 [MessagePackObject]
