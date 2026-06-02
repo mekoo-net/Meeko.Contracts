@@ -5,21 +5,25 @@ namespace Meeko.Contracts.DemuxAi.Admin;
 [MessagePackObject]
 public sealed class ProviderGroupDto
 {
-    [Key(0)] public string QueueGroup { get; set; } = string.Empty;
-    [Key(1)] public string DisplayName { get; set; } = string.Empty;
-    [Key(2)] public string Status { get; set; } = "active";
-    [Key(3)] public int UpstreamModelCount { get; set; }
-    [Key(4)] public string? Notes { get; set; }
-    [Key(5)] public DateTime ImportedAtUtc { get; set; }
-    [Key(6)] public DateTime UpdatedAtUtc { get; set; }
+    /// <summary>供应商组（vendor）主键，删除/编辑均以此为准。</summary>
+    [Key(0)] public long Id { get; set; }
+    [Key(1)] public string QueueGroup { get; set; } = string.Empty;
+    [Key(2)] public string DisplayName { get; set; } = string.Empty;
+    [Key(3)] public string Status { get; set; } = "active";
+    [Key(4)] public int UpstreamModelCount { get; set; }
+    [Key(5)] public string? Notes { get; set; }
+    [Key(6)] public DateTime ImportedAtUtc { get; set; }
+    [Key(7)] public DateTime UpdatedAtUtc { get; set; }
 }
 
 [MessagePackObject]
 public sealed class ProviderUpstreamModelDto
 {
-    [Key(0)] public string QueueGroup { get; set; } = string.Empty;
-    [Key(1)] public string VendorModel { get; set; } = string.Empty;
-    [Key(2)] public string? Label { get; set; }
+    /// <summary>入库条目（model_meta）主键，删除/编辑均以此为准，避免在路径里传含斜杠的模型名。</summary>
+    [Key(0)] public long Id { get; set; }
+    [Key(1)] public string QueueGroup { get; set; } = string.Empty;
+    [Key(2)] public string VendorModel { get; set; } = string.Empty;
+    [Key(3)] public string? Label { get; set; }
 }
 
 [MessagePackObject]
