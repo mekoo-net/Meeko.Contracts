@@ -26,7 +26,7 @@ public sealed class UpsertRatioCommand
 [MessagePackObject]
 public sealed class DeleteRatioCommand
 {
-    [Key(0)] public string ModelName { get; set; } = string.Empty;
+    [Key(0)] public long Id { get; set; }
     [Key(1)] public string? Reason { get; set; }
 }
 
