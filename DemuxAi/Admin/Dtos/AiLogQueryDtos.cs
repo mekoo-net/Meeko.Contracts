@@ -328,6 +328,27 @@ public sealed class AiVendorStatQuery
     [Key(4)] public string? VendorKey { get; set; }
 }
 
+/// <summary>按对外模型别名（alias）聚合的 Top 排行行。</summary>
+[MessagePackObject]
+public sealed class AiModelStatDto
+{
+    [Key(0)] public string ModelName { get; set; } = string.Empty;
+    [Key(1)] public int RequestCount { get; set; }
+    [Key(2)] public decimal TotalQuota { get; set; }
+    [Key(3)] public int ErrorCount { get; set; }
+}
+
+/// <summary>按模型渠道（Provider.id）聚合的 Top 排行行。</summary>
+[MessagePackObject]
+public sealed class AiProviderStatDto
+{
+    [Key(0)] public int ProviderId { get; set; }
+    [Key(1)] public int RequestCount { get; set; }
+    [Key(2)] public int ErrorCount { get; set; }
+    /// <summary>平均首字延迟（ms）；仅 streamed + success 样本入均值。</summary>
+    [Key(3)] public int AvgTokenLatencyMs { get; set; }
+}
+
 [MessagePackObject]
 public sealed class ReverseAiLogCommand
 {
