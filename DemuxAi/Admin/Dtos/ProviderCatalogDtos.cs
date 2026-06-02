@@ -18,16 +18,15 @@ public sealed class ProviderGroupDto
 public sealed class ProviderUpstreamModelDto
 {
     [Key(0)] public string QueueGroup { get; set; } = string.Empty;
-    [Key(1)] public string UpstreamModelId { get; set; } = string.Empty;
+    [Key(1)] public string VendorModel { get; set; } = string.Empty;
     [Key(2)] public string? Label { get; set; }
 }
 
 [MessagePackObject]
 public sealed class DiscoveredUpstreamModelDto
 {
-    [Key(0)] public string UpstreamModelId { get; set; } = string.Empty;
-    [Key(1)] public string? Label { get; set; }
-    [Key(2)] public bool AlreadyImported { get; set; }
+    [Key(0)] public string VendorModel { get; set; } = string.Empty;
+    [Key(1)] public bool AlreadyImported { get; set; }
 }
 
 [MessagePackObject]
@@ -49,8 +48,7 @@ public sealed class DiscoverCatalogResultDto
 [MessagePackObject]
 public sealed class ImportUpstreamModelPayload
 {
-    [Key(0)] public string UpstreamModelId { get; set; } = string.Empty;
-    [Key(1)] public string? Label { get; set; }
+    [Key(0)] public string VendorModel { get; set; } = string.Empty;
 }
 
 [MessagePackObject]
