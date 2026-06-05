@@ -10,11 +10,10 @@ public sealed class PricingAdminDto
     [Key(1)] public string ModelId { get; set; } = string.Empty;
     [Key(2)] public string BillingType { get; set; } = "per_token";
     [Key(3)] public string PricingJson { get; set; } = "{}";
-    [Key(4)] public decimal Multiplier { get; set; } = 1m;
-    [Key(5)] public string Currency { get; set; } = "CNY";
-    [Key(6)] public string TierMultipliersJson { get; set; } = "{}";
-    [Key(7)] public DateTime EffectiveFromUtc { get; set; }
-    [Key(8)] public DateTime UpdatedAtUtc { get; set; }
+    [Key(4)] public string Currency { get; set; } = "CNY";
+    [Key(5)] public string TierMultipliersJson { get; set; } = "{}";
+    [Key(6)] public DateTime EffectiveFromUtc { get; set; }
+    [Key(7)] public DateTime UpdatedAtUtc { get; set; }
 }
 
 [MessagePackObject]
@@ -24,10 +23,9 @@ public sealed class UpsertModelPricingPayload
     [Key(1)] public string? BillingType { get; set; }
     /// <summary>嵌套 pricing 对象 JSON（按 billingType 变体）。</summary>
     [Key(2)] public string? PricingJson { get; set; }
-    [Key(3)] public decimal? Multiplier { get; set; }
-    [Key(4)] public string? Currency { get; set; }
-    [Key(5)] public string? TierMultipliersJson { get; set; }
-    [Key(6)] public DateTime? EffectiveFromUtc { get; set; }
+    [Key(3)] public string? Currency { get; set; }
+    [Key(4)] public string? TierMultipliersJson { get; set; }
+    [Key(5)] public DateTime? EffectiveFromUtc { get; set; }
 
-    [Key(7)] public string? Reason { get; set; }
+    [Key(6)] public string? Reason { get; set; }
 }

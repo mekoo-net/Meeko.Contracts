@@ -74,9 +74,7 @@ public sealed class LogCostDto
 {
     [Key(0)] public LogCostInputDto Input { get; set; } = new();
     [Key(1)] public LogCostOutputDto Output { get; set; } = new();
-    [Key(2)] public decimal MultiplierSnapshot { get; set; }
-    [Key(3)] public decimal TierSnapshot { get; set; }
-    [Key(4)] public decimal Total { get; set; }
+    [Key(2)] public decimal Total { get; set; }
 }
 
 [MessagePackObject]
@@ -96,9 +94,7 @@ public sealed class LogPerCallCostDto
 {
     [Key(0)] public decimal PricePerCall { get; set; }
     [Key(1)] public decimal CachedPricePerCall { get; set; }
-    [Key(2)] public decimal MultiplierSnapshot { get; set; }
-    [Key(3)] public decimal TierSnapshot { get; set; }
-    [Key(4)] public decimal Total { get; set; }
+    [Key(2)] public decimal Total { get; set; }
 }
 
 [MessagePackObject]
@@ -119,9 +115,7 @@ public sealed class LogPerImageUsageDto
 public sealed class LogPerImageCostDto
 {
     [Key(0)] public decimal PricePerImage { get; set; }
-    [Key(1)] public decimal MultiplierSnapshot { get; set; }
-    [Key(2)] public decimal TierSnapshot { get; set; }
-    [Key(3)] public decimal Total { get; set; }
+    [Key(1)] public decimal Total { get; set; }
 }
 
 [MessagePackObject]
@@ -141,9 +135,7 @@ public sealed class LogPerVideoUsageDto
 public sealed class LogPerVideoCostDto
 {
     [Key(0)] public decimal PricePerSecond { get; set; }
-    [Key(1)] public decimal MultiplierSnapshot { get; set; }
-    [Key(2)] public decimal TierSnapshot { get; set; }
-    [Key(3)] public decimal Total { get; set; }
+    [Key(1)] public decimal Total { get; set; }
 }
 
 [MessagePackObject]
@@ -156,9 +148,7 @@ public sealed class LogPerAudioMinuteUsageDto
 public sealed class LogPerAudioMinuteCostDto
 {
     [Key(0)] public decimal PricePerMinute { get; set; }
-    [Key(1)] public decimal MultiplierSnapshot { get; set; }
-    [Key(2)] public decimal TierSnapshot { get; set; }
-    [Key(3)] public decimal Total { get; set; }
+    [Key(1)] public decimal Total { get; set; }
 }
 
 [MessagePackObject]
@@ -171,9 +161,7 @@ public sealed class LogPerCharacterUsageDto
 public sealed class LogPerCharacterCostDto
 {
     [Key(0)] public decimal PricePerKChar { get; set; }
-    [Key(1)] public decimal MultiplierSnapshot { get; set; }
-    [Key(2)] public decimal TierSnapshot { get; set; }
-    [Key(3)] public decimal Total { get; set; }
+    [Key(1)] public decimal Total { get; set; }
 }
 
 [MessagePackObject]
