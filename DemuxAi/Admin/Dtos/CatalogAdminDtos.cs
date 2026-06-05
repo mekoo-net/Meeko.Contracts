@@ -13,10 +13,11 @@ public sealed class VendorDto
     [JsonConverter(typeof(LongToStringConverter))]
     public long Id { get; set; }
 
-    [Key(1)] public string Name { get; set; } = string.Empty;
-    [Key(2)] public AiVendorStatus Status { get; set; }
-    [Key(3)] public DateTime CreatedAtUtc { get; set; }
-    [Key(4)] public DateTime UpdatedAtUtc { get; set; }
+    [Key(1)] public string QueueGroup { get; set; } = string.Empty;
+    [Key(2)] public string? VendorSlug { get; set; }
+    [Key(3)] public AiVendorStatus Status { get; set; }
+    [Key(4)] public DateTime CreatedAtUtc { get; set; }
+    [Key(5)] public DateTime UpdatedAtUtc { get; set; }
 }
 
 [MessagePackObject]
@@ -28,7 +29,8 @@ public sealed class UpsertVendorCommand
     public long? Id { get; set; }
 
     [Key(1)] public string Name { get; set; } = string.Empty;
-    [Key(2)] public AiVendorStatus Status { get; set; } = AiVendorStatus.Active;
+    [Key(2)] public string? VendorSlug { get; set; }
+    [Key(3)] public AiVendorStatus Status { get; set; } = AiVendorStatus.Active;
 }
 
 [MessagePackObject]

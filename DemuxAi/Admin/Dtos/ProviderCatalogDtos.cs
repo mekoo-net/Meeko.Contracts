@@ -8,7 +8,7 @@ public sealed class ProviderGroupDto
     /// <summary>供应商组（vendor）主键，删除/编辑均以此为准。</summary>
     [Key(0)] public long Id { get; set; }
     [Key(1)] public string QueueGroup { get; set; } = string.Empty;
-    [Key(2)] public string DisplayName { get; set; } = string.Empty;
+    [Key(2)] public string? VendorSlug { get; set; }
     [Key(3)] public string Status { get; set; } = "active";
     [Key(4)] public int UpstreamModelCount { get; set; }
     [Key(5)] public string? Notes { get; set; }
@@ -59,7 +59,7 @@ public sealed class ImportUpstreamModelPayload
 public sealed class ImportProviderGroupPayload
 {
     [Key(0)] public string QueueGroup { get; set; } = string.Empty;
-    [Key(1)] public string DisplayName { get; set; } = string.Empty;
+    [Key(1)] public string? VendorSlug { get; set; }
     [Key(2)] public string? Notes { get; set; }
     [Key(3)] public ImportUpstreamModelPayload[] Models { get; set; } = [];
 }
