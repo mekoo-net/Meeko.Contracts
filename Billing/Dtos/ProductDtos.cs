@@ -21,12 +21,26 @@ public sealed class ProductListResult
 }
 
 [MessagePackObject]
-public sealed class RegisterProductCommand
+public sealed class DiscoveredProductDto
 {
     [Key(0)] public required string Code { get; set; }
     [Key(1)] public required string Domain { get; set; }
-    [Key(2)] public required string DisplayName { get; set; }
-    [Key(3)] public string? MetadataJson { get; set; }
+    [Key(2)] public required string SuggestedDisplayName { get; set; }
+    [Key(3)] public bool AlreadyRegistered { get; set; }
+    [Key(4)] public required string ServiceName { get; set; }
+}
+
+[MessagePackObject]
+public sealed class DiscoveredProductListResult
+{
+    [Key(0)] public DiscoveredProductDto[] Items { get; set; } = [];
+}
+
+[MessagePackObject]
+public sealed class RegisterDiscoveredProductCommand
+{
+    [Key(0)] public required string Code { get; set; }
+    [Key(1)] public string? DisplayName { get; set; }
 }
 
 [MessagePackObject]
@@ -35,11 +49,4 @@ public sealed class UpdateProductCommand
     [Key(0)] public required string Code { get; set; }
     [Key(1)] public string? DisplayName { get; set; }
     [Key(2)] public string? MetadataJson { get; set; }
-}
-
-[MessagePackObject]
-public sealed class SetProductActiveCommand
-{
-    [Key(0)] public required string Code { get; set; }
-    [Key(1)] public bool Active { get; set; }
 }

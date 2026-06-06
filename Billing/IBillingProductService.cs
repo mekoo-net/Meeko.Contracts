@@ -9,9 +9,11 @@ public interface IBillingProductService : IService<IBillingProductService>
 
     UnaryResult<ProductDto?> GetProductAsync(string code);
 
-    UnaryResult<ProductDto> RegisterProductAsync(RegisterProductCommand cmd);
+    UnaryResult<DiscoveredProductListResult> DiscoverProductsAsync();
+
+    UnaryResult<ProductDto> RegisterDiscoveredProductAsync(RegisterDiscoveredProductCommand cmd);
+
+    UnaryResult<bool> UnregisterProductAsync(string code);
 
     UnaryResult<ProductDto> UpdateProductAsync(UpdateProductCommand cmd);
-
-    UnaryResult<ProductDto> SetActiveAsync(SetProductActiveCommand cmd);
 }

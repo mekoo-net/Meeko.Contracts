@@ -15,20 +15,12 @@ public sealed class UsageRecordDto
     [JsonConverter(typeof(LongToStringConverter))]
     public long AccountUid { get; set; }
 
-    [Key(2)]
-    [JsonConverter(typeof(LongToStringConverter))]
-    public long OrderId { get; set; }
-
-    [Key(3)]
-    [JsonConverter(typeof(NullableLongToStringConverter))]
-    public long? SubscriptionId { get; set; }
-
-    [Key(4)] public string ProductCode { get; set; } = string.Empty;
-    [Key(5)] public string Domain { get; set; } = string.Empty;
-    [Key(6)] public string MetricKey { get; set; } = string.Empty;
-    [Key(7)] public decimal Quantity { get; set; }
-    [Key(8)] public decimal UnitPrice { get; set; }
-    [Key(9)] public decimal Amount { get; set; }
-    [Key(10)] public DateTime OccurredAtUtc { get; set; }
-    [Key(11)] public UsageStatus Status { get; set; }
+    [Key(2)] public string ProductCode { get; set; } = string.Empty;
+    [Key(3)] public string Domain { get; set; } = string.Empty;
+    [Key(4)] public string MetricKey { get; set; } = string.Empty;
+    [Key(5)] public decimal Quantity { get; set; }
+    [Key(6)] public decimal UnitPrice { get; set; }
+    [Key(7)] public decimal Amount { get; set; }
+    [Key(8)] public DateTime OccurredAtUtc { get; set; }
+    [Key(9)] public UsageStatus Status { get; set; }
 }

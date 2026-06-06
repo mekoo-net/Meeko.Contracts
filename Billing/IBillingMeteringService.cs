@@ -2,13 +2,9 @@ using MagicOnion;
 
 namespace Meeko.Contracts.Billing;
 
-/// <summary>产品域 → Billing：hold / commit / release / usage / 订单生命周期回写。</summary>
+/// <summary>产品域 → Billing：hold / commit / release / usage。</summary>
 public interface IBillingMeteringService : IService<IBillingMeteringService>
 {
-    UnaryResult<bool> ConfirmOrderProvisionedAsync(long orderId, long resourceId);
-
-    UnaryResult<bool> ReportOrderTerminatedAsync(long orderId, DateTime terminatedAtUtc);
-
     UnaryResult<HoldResult> TryHoldAsync(HoldRequest request);
 
     UnaryResult<bool> CommitHoldAsync(long holdId, decimal actualAmount, string idempotencyKey);
