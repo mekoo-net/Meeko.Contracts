@@ -29,3 +29,18 @@ public sealed class UpsertModelPricingPayload
 
     [Key(6)] public string? Reason { get; set; }
 }
+
+[MessagePackObject]
+public sealed class VendorPricingStatsEntryDto
+{
+    [Key(0)] public int Configured { get; set; }
+    [Key(1)] public int Unconfigured { get; set; }
+}
+
+[MessagePackObject]
+public sealed class UnconfiguredAliasDto
+{
+    [Key(0)] public string Alias { get; set; } = string.Empty;
+    [Key(1)] public string VendorKey { get; set; } = string.Empty;
+    [Key(2)] public string VendorModel { get; set; } = string.Empty;
+}

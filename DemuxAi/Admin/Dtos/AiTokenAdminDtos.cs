@@ -27,6 +27,8 @@ public sealed class AiTokenDto
     [Key(10)] public DateTime? ExpiresAtUtc { get; set; }
     [Key(11)] public DateTime CreatedAtUtc { get; set; }
     [Key(12)] public DateTime? LastUsedAtUtc { get; set; }
+    [Key(13)] public string ModelBillingScope { get; set; } = "all";
+    [Key(14)] public string[] ModelVendorKeys { get; set; } = [];
 }
 
 [MessagePackObject]
@@ -42,6 +44,8 @@ public sealed class IssueAiTokenCommand
     [Key(4)] public string[] ModelLimits { get; set; } = [];
     [Key(5)] public string[] AllowIpCidrs { get; set; } = [];
     [Key(6)] public DateTime? ExpiresAtUtc { get; set; }
+    [Key(7)] public string ModelBillingScope { get; set; } = "all";
+    [Key(8)] public string[] ModelVendorKeys { get; set; } = [];
 }
 
 [MessagePackObject]
@@ -74,6 +78,8 @@ public sealed class UpdateAiTokenCommand
     [Key(5)] public DateTime? ExpiresAtUtc { get; set; }
     [Key(6)] public bool UnlimitedQuota { get; set; }
     [Key(7)] public decimal RemainQuota { get; set; }
+    [Key(8)] public string ModelBillingScope { get; set; } = "all";
+    [Key(9)] public string[] ModelVendorKeys { get; set; } = [];
 }
 
 [MessagePackObject]

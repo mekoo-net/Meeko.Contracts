@@ -12,4 +12,6 @@ public sealed class RatioRouteDto
     [Key(0)] public string Alias { get; set; } = string.Empty;
     [Key(1)] public string VendorKey { get; set; } = string.Empty;
     [Key(2)] public string VendorModel { get; set; } = string.Empty;
+    [Key(3)] public string BillingType { get; set; } = string.Empty;
+    [Key(4)] public string VendorSlug { get; set; } = string.Empty;
 }

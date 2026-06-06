@@ -335,6 +335,8 @@ public sealed class AiProviderStatDto
     [Key(2)] public int ErrorCount { get; set; }
     /// <summary>平均首字延迟（ms）；仅 streamed + success 样本入均值。</summary>
     [Key(3)] public int AvgTokenLatencyMs { get; set; }
+    /// <summary>渠道展示名（VendorSlug 优先，否则 QueueGroup）。</summary>
+    [Key(4)] public string? ProviderName { get; set; }
 }
 
 [MessagePackObject]

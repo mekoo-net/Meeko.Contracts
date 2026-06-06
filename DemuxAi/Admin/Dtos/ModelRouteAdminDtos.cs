@@ -30,3 +30,22 @@ public sealed class ModelRoutePublishedPayload
 {
     [Key(0)] public bool IsPublished { get; set; }
 }
+
+/// <summary>按渠道 + 上游模型聚合的别名计数（不含明细行）。</summary>
+[MessagePackObject]
+public sealed class ModelRouteStatsDto
+{
+    [Key(0)] public string VendorKey { get; set; } = string.Empty;
+    [Key(1)] public int Total { get; set; }
+    [Key(2)] public Dictionary<string, int> ByVendorModel { get; set; } = new(StringComparer.Ordinal);
+}
+
+[MessagePackObject]
+public sealed class ModelCarrierEntryDto
+{
+    [Key(0)] public string ProviderUid { get; set; } = string.Empty;
+    [Key(1)] public string ProviderName { get; set; } = string.Empty;
+    [Key(2)] public string ModelName { get; set; } = string.Empty;
+    [Key(3)] public int MappingWeight { get; set; } = 100;
+    [Key(4)] public bool Enabled { get; set; }
+}

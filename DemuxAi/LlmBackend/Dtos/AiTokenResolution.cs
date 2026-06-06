@@ -15,4 +15,8 @@ public sealed class AiTokenResolution
     [Key(6)] public string[] ModelLimits { get; set; } = [];
     [Key(7)] public string[] AllowIpCidrs { get; set; } = [];
     [Key(8)] public DateTime? ExpiresAtUtc { get; set; }
+    /// <summary>模型计费范围：<c>all</c> | <c>per_call</c> | <c>metered</c>。</summary>
+    [Key(9)] public string ModelBillingScope { get; set; } = "all";
+    /// <summary>允许的 vendor slug 列表；空表示不限制通道。</summary>
+    [Key(10)] public string[] ModelVendorKeys { get; set; } = [];
 }

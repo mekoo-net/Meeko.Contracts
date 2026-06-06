@@ -107,3 +107,13 @@ public sealed class ListRedemptionsResult
     [Key(0)] public RedemptionDto[] Items { get; set; } = [];
     [Key(1)] public int Total { get; set; }
 }
+
+[MessagePackObject]
+public sealed class RedemptionStatsDto
+{
+    [Key(0)] public int Total { get; set; }
+    [Key(1)] public int Claimable { get; set; }
+    [Key(2)] public int InProgress { get; set; }
+    [Key(3)] public int Exhausted { get; set; }
+    [Key(4)] public int Expired { get; set; }
+}
