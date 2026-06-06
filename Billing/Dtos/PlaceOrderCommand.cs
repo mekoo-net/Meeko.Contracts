@@ -16,4 +16,7 @@ public sealed class PlaceOrderCommand
     [Key(3)] public string? Currency { get; set; } = "CNY";
     [Key(4)] public string? MetadataJson { get; set; }
     [Key(5)] public string? IdempotencyKey { get; set; }
+    [Key(6)] public BillingMode? BillingMode { get; set; }
+    [Key(7)] public SubscriptionPeriod? Period { get; set; }
+    [Key(8)] public decimal? UnitPrice { get; set; }
 }
