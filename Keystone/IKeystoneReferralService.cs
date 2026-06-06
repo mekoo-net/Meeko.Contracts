@@ -7,8 +7,6 @@ public interface IKeystoneReferralService : IService<IKeystoneReferralService>
 {
     UnaryResult<long?> GetInviterAsync(long accountUid);
 
-    UnaryResult<Dtos.ResolveReferralRateResult> ResolveReferralRateAsync(Dtos.ResolveReferralRateQuery query);
-
     UnaryResult<int> GetInviteCountAsync(long accountUid);
 
     UnaryResult<Dtos.ListReferralInviteesResult> ListInviteesAsync(Dtos.ListReferralInviteesQuery query);
@@ -16,6 +14,4 @@ public interface IKeystoneReferralService : IService<IKeystoneReferralService>
     UnaryResult<Dtos.AccountReferralAdminWireDto?> GetAccountReferralAdminAsync(long accountUid);
 
     UnaryResult<bool> UnlinkInviterAsync(long accountUid);
-
-    UnaryResult<bool> SetRebateRateOverrideAsync(Dtos.SetAccountReferralRateWireCommand cmd);
 }

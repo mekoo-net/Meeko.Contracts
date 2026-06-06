@@ -14,4 +14,6 @@ public sealed class ReferralAccountSummaryDto
     [Key(3)] public decimal WithdrawnAmount { get; set; }
 
     [Key(4)] public string Currency { get; set; } = "CNY";
+
+    [Key(5)] public decimal EffectiveRebateRatePercent { get; set; }
 }

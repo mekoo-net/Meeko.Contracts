@@ -23,4 +23,12 @@ public interface IBillingReferralService : IService<IBillingReferralService>
 
     /// <summary>列出可参与返利的业务域（来自 products 表去重 domain）。</summary>
     UnaryResult<ReferralProductListResult> ListReferralProductsAsync();
+
+    UnaryResult<ReferralSettingsAdminWireDto> GetReferralSettingsAsync();
+
+    UnaryResult<ReferralSettingsAdminWireDto> UpdateReferralSettingsAsync(UpdateReferralSettingsWireCommand cmd);
+
+    UnaryResult<decimal?> GetAccountReferralRateOverrideAsync(long accountUid);
+
+    UnaryResult<bool> SetAccountReferralRateOverrideAsync(SetReferralAccountOverrideWireCommand cmd);
 }
