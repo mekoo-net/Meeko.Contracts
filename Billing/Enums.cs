@@ -102,3 +102,17 @@ public enum InvoiceStatus : short
     Paid = 2,
     Void = 3,
 }
+
+public enum ReferralWithdrawalStatus : short
+{
+    Pending = 0,
+    Approved = 1,
+    Rejected = 2,
+    Paid = 3,
+}
+
+public enum ReferralWithdrawalMethod : short
+{
+    Alipay = 0,
+    Bank = 1,
+}

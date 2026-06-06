@@ -23,4 +23,7 @@ public sealed class CreateInternalRechargeCommand
     public long? OperatorUid { get; set; }
 
     [Key(5)] public string? IdempotencyKey { get; set; }
+
+    /// <summary>充值渠道 / 产品标识（如 demuxai）。</summary>
+    [Key(6)] public string? Channel { get; set; }
 }
