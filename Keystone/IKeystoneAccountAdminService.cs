@@ -16,5 +16,9 @@ public interface IKeystoneAccountAdminService : IService<IKeystoneAccountAdminSe
 
     UnaryResult<AccountAdminCommandResult> SetAccountStatusAsync(SetAccountStatusCommand cmd);
 
+    UnaryResult<AccountAdminCommandResult> GrantAchievementAsync(GrantAchievementCommand cmd);
+
+    UnaryResult<AccountAdminCommandResult> RevokeAchievementAsync(RevokeAchievementCommand cmd);
+
     UnaryResult<CreateIamUserAdminResult> CreateIamUserAsync(CreateIamUserAdminCommand cmd);
 }

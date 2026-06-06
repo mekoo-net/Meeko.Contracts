@@ -14,4 +14,5 @@ public sealed class AccountAdminDetail
     [Key(6)] public DateTime CreatedAtUtc { get; set; }
     [Key(7)] public DateTime UpdatedAtUtc { get; set; }
     [Key(8)] public DateTime? LastActiveAtUtc { get; set; }
+    [Key(9)] public AccountAchievementDto[] Achievements { get; set; } = [];
 }

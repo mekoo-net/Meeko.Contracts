@@ -20,4 +20,7 @@ public interface IBillingReferralService : IService<IBillingReferralService>
     UnaryResult<ReferralWithdrawalDto> RejectWithdrawalAsync(RejectReferralWithdrawalCommand cmd);
 
     UnaryResult<ReferralWithdrawalDto> MarkWithdrawalPaidAsync(long withdrawalId);
+
+    /// <summary>列出可参与返利的业务域（来自 products 表去重 domain）。</summary>
+    UnaryResult<ReferralProductListResult> ListReferralProductsAsync();
 }
