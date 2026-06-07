@@ -13,7 +13,6 @@ public sealed class HoldRequest
 
     [Key(1)] public string ProductCode { get; set; } = string.Empty;
     [Key(2)] public decimal EstimateAmount { get; set; }
-    [Key(3)] public string Domain { get; set; } = string.Empty;
     [Key(4)] public WalletTxnReferenceKind ReferenceKind { get; set; } = WalletTxnReferenceKind.None;
 
     [Key(5)]

@@ -12,7 +12,6 @@ public sealed class ReportUsageRequest
     public long AccountUid { get; set; }
 
     [Key(1)] public string ProductCode { get; set; } = string.Empty;
-    [Key(2)] public string Domain { get; set; } = string.Empty;
     [Key(3)] public string MetricKey { get; set; } = string.Empty;
     [Key(4)] public decimal Quantity { get; set; }
     [Key(5)] public decimal UnitPrice { get; set; }
