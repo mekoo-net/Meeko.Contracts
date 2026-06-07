@@ -9,5 +9,5 @@ public sealed class RechargeSourceInfo
     [Key(1)] public required int Scene { get; set; }
     [Key(2)] public required string RefNo { get; set; }
 
-    [Key(3)] public string? Channel { get; set; }
+    [Key(3)] public string? ProductCode { get; set; }
 }

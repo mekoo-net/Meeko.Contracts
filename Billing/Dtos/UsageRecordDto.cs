@@ -16,7 +16,6 @@ public sealed class UsageRecordDto
     public long AccountUid { get; set; }
 
     [Key(2)] public string ProductCode { get; set; } = string.Empty;
-    [Key(3)] public string Domain { get; set; } = string.Empty;
     [Key(4)] public string MetricKey { get; set; } = string.Empty;
     [Key(5)] public decimal Quantity { get; set; }
     [Key(6)] public decimal UnitPrice { get; set; }

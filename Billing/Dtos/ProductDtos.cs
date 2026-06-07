@@ -6,7 +6,6 @@ namespace Meeko.Contracts.Billing;
 public sealed class ProductDto
 {
     [Key(0)] public required string Code { get; set; }
-    [Key(1)] public required string Domain { get; set; }
     [Key(2)] public required string DisplayName { get; set; }
     [Key(3)] public string? MetadataJson { get; set; }
     [Key(4)] public bool Active { get; set; }
@@ -24,7 +23,6 @@ public sealed class ProductListResult
 public sealed class DiscoveredProductDto
 {
     [Key(0)] public required string Code { get; set; }
-    [Key(1)] public required string Domain { get; set; }
     [Key(2)] public required string SuggestedDisplayName { get; set; }
     [Key(3)] public bool AlreadyRegistered { get; set; }
     [Key(4)] public required string ServiceName { get; set; }
