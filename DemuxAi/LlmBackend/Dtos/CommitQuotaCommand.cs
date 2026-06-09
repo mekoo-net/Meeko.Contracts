@@ -29,4 +29,7 @@ public sealed class CommitQuotaCommand
     [Key(17)] public string? ErrorMessage { get; set; }
     /// <summary>W3C trace id（32 位十六进制）。把这条计费记录关联回网关请求的分布式 trace。</summary>
     [Key(18)] public string? TraceId { get; set; }
+
+    /// <summary>渠道键（NATS 队列组）。与 <see cref="ModelName"/>(别名) 共同定位定价行——别名可跨渠道重名。</summary>
+    [Key(19)] public string VendorKey { get; set; } = string.Empty;
 }

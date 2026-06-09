@@ -21,4 +21,7 @@ public sealed class ReserveQuotaCommand
     [Key(8)] public string? ClientIp { get; set; }
     /// <summary>调用协议（anthropic_messages / openai_chat / ...）。reserve 时即上报，便于追踪未 commit 的预扣记录。</summary>
     [Key(9)] public string? ApiType { get; set; }
+
+    /// <summary>渠道键（NATS 队列组）。与 <see cref="ModelName"/>(别名) 共同定位定价行——别名可跨渠道重名。</summary>
+    [Key(10)] public string VendorKey { get; set; } = string.Empty;
 }
