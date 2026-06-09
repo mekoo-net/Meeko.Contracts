@@ -47,9 +47,11 @@ public enum AiModelEndpointType
 
 public enum AiUsageStatus
 {
-    Success = 1,
-    Failure = 2,
-    Cancelled = 3,
+    /// <summary>上游已调用，但 Billing 结算尚未成功 → 待结算（"调用中"）。可重试结算后转 Success/Failure。</summary>
+    Pending   = 1,
+    Success   = 2,
+    Failure   = 3,
+    Cancelled = 4,
 }
 
 public enum RedemptionStatus

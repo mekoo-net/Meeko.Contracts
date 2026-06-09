@@ -217,17 +217,19 @@ public sealed class AiUsageLogDto
     [Key(8)]  public bool Streamed { get; set; }
     [Key(9)]  public long? ClientIpV4 { get; set; }
     [Key(10)] public bool Success { get; set; }
-    [Key(11)] public LogErrorDto? Error { get; set; }
-    [Key(12)] public string BillingType { get; set; } = string.Empty;
-    [Key(13)] public object Usage { get; set; } = new LogUsageDto();
-    [Key(14)] public object Cost { get; set; } = new LogCostDto();
-    [Key(15)] public LogBillDto? Bill { get; set; }
+    /// <summary>结算状态：<c>pending</c> | <c>success</c> | <c>failure</c> | <c>cancelled</c>。比 <see cref="Success"/> 表达力更强。</summary>
+    [Key(11)] public string Status { get; set; } = "success";
+    [Key(12)] public LogErrorDto? Error { get; set; }
+    [Key(13)] public string BillingType { get; set; } = string.Empty;
+    [Key(14)] public object Usage { get; set; } = new LogUsageDto();
+    [Key(15)] public object Cost { get; set; } = new LogCostDto();
+    [Key(16)] public LogBillDto? Bill { get; set; }
     /// <summary>sk- 令牌快照；PG 直发（无令牌）时为 null。</summary>
-    [Key(16)] public LogTokenDto? Token { get; set; }
+    [Key(17)] public LogTokenDto? Token { get; set; }
     /// <summary>请求命中的供应商（供应商组）。来自定价快照绑定，历史不丢。</summary>
-    [Key(17)] public string? VendorKey { get; set; }
+    [Key(18)] public string? VendorKey { get; set; }
     /// <summary>请求命中的上游真实模型名（vendor_model）。来自别名快照绑定，历史不丢。</summary>
-    [Key(18)] public string? VendorModel { get; set; }
+    [Key(19)] public string? VendorModel { get; set; }
 }
 
 [MessagePackObject]
