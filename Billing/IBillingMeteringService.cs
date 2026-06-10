@@ -22,4 +22,10 @@ public interface IBillingMeteringService : IService<IBillingMeteringService>
 
     /// <summary>按 Commit 幂等键全额驳回（退回钱包 + 写 Refund 流水）。</summary>
     UnaryResult<ReverseBillResult> ReverseCommitByIdempotencyKeyAsync(ReverseCommitByKeyCommand cmd);
+
+    /// <summary>
+    /// 按 ProductCode 聚合某账户在时间窗内的已落账消费金额（Commit 流水合计），
+    /// 供产品域仪表板展示「本产品消费」，避免产品域跨库直读 Billing schema。
+    /// </summary>
+    UnaryResult<ProductUsageSummary> GetProductUsageSummaryAsync(ProductUsageSummaryQuery query);
 }
