@@ -12,6 +12,9 @@ public interface IKeystoneAccountAdminService : IService<IKeystoneAccountAdminSe
 
     UnaryResult<AccountAdminDetail?> GetAccountAdminAsync(long accountUid);
 
+    /// <summary>按 uid 批量查账户联系信息（展示名 / 邮箱 / 手机），供 Bff enrich 流水类列表。</summary>
+    UnaryResult<AccountContactBatchResult> GetAccountContactsAsync(long[] accountUids);
+
     UnaryResult<AccountAdminCommandResult> UpdateAccountAsync(UpdateAccountCommand cmd);
 
     UnaryResult<AccountAdminCommandResult> SetAccountStatusAsync(SetAccountStatusCommand cmd);
