@@ -7,6 +7,9 @@ public interface IBillingWalletService : IService<IBillingWalletService>
 {
     UnaryResult<WalletSnapshot?> GetWalletAsync(long accountUid);
 
+    /// <summary>批量查钱包快照（一次 IN 查询），供列表类视图 enrich 余额。未开户的 uid 不在返回集中。</summary>
+    UnaryResult<WalletSnapshot[]> GetWalletsAsync(long[] accountUids);
+
     UnaryResult<RechargeIntent> CreateRechargeAsync(CreateRechargeCommand cmd);
 
     /// <summary>仅 notify HTTP 回调内部使用，幂等。</summary>
