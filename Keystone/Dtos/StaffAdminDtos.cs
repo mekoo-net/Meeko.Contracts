@@ -136,6 +136,37 @@ public sealed class StaffRoleDto
 }
 
 [MessagePackObject]
+public sealed class ListStaffRolesQuery
+{
+    [Key(0)] public int Page { get; set; } = 1;
+    [Key(1)] public int PageSize { get; set; } = 20;
+    [Key(2)] public string? Keyword { get; set; }
+}
+
+/// <summary>角色列表项：只含权限<b>数量</b>，不下发完整权限码集合，编辑时再按 id 拉取明细。</summary>
+[MessagePackObject]
+public sealed class StaffRoleListItemDto
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long Id { get; set; }
+
+    [Key(1)] public string Name { get; set; } = string.Empty;
+    [Key(2)] public string? Description { get; set; }
+    [Key(3)] public bool IsSystem { get; set; }
+    [Key(4)] public int PermissionCount { get; set; }
+    [Key(5)] public int MemberCount { get; set; }
+    [Key(6)] public DateTime CreatedAtUtc { get; set; }
+}
+
+[MessagePackObject]
+public sealed class StaffRoleListResult
+{
+    [Key(0)] public required StaffRoleListItemDto[] Items { get; set; }
+    [Key(1)] public required int Total { get; set; }
+}
+
+[MessagePackObject]
 public sealed class StaffPermissionDto
 {
     [Key(0)]

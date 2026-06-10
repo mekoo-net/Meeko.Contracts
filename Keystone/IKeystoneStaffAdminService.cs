@@ -14,7 +14,8 @@ public interface IKeystoneStaffAdminService : IService<IKeystoneStaffAdminServic
     UnaryResult<StaffAdminCommandResult> ResetStaffPasswordAsync(ResetStaffPasswordCommand cmd);
     UnaryResult<StaffAdminCommandResult> ChangeStaffRoleAsync(ChangeStaffRoleCommand cmd);
 
-    UnaryResult<StaffRoleDto[]> ListRolesAsync();
+    UnaryResult<StaffRoleListResult> ListRolesAsync(ListStaffRolesQuery query);
+    UnaryResult<StaffRoleDto?> GetRoleAsync(long roleId);
     UnaryResult<StaffAdminCommandResult> CreateRoleAsync(CreateStaffRoleCommand cmd);
     UnaryResult<StaffAdminCommandResult> UpdateRoleAsync(UpdateStaffRoleCommand cmd);
     UnaryResult<StaffAdminCommandResult> DeleteRoleAsync(DeleteStaffRoleCommand cmd);
