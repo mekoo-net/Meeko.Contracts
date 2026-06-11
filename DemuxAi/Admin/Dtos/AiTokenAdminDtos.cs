@@ -29,6 +29,11 @@ public sealed class AiTokenDto
     [Key(12)] public DateTime? LastUsedAtUtc { get; set; }
     [Key(13)] public string ModelBillingScope { get; set; } = "all";
     [Key(14)] public string[] ModelVendorKeys { get; set; } = [];
+
+    /// <summary>创建该 key 的 IamUser.Uid（子账号归属审计）；历史/无法归属时为 null。</summary>
+    [Key(15)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? IamUid { get; set; }
 }
 
 [MessagePackObject]
@@ -46,6 +51,11 @@ public sealed class IssueAiTokenCommand
     [Key(6)] public DateTime? ExpiresAtUtc { get; set; }
     [Key(7)] public string ModelBillingScope { get; set; } = "all";
     [Key(8)] public string[] ModelVendorKeys { get; set; } = [];
+
+    /// <summary>创建者 IamUser.Uid（子账号归属审计）；调用方从 X-Iam-Uid 解析，解析不到时为 null。</summary>
+    [Key(9)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? IamUid { get; set; }
 }
 
 [MessagePackObject]
