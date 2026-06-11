@@ -25,4 +25,13 @@ public interface IInternalLlmInvokeService : IService<IInternalLlmInvokeService>
     /// one <see cref="InternalChunkType.Error"/> chunk.
     /// </summary>
     Task<ServerStreamingResult<InternalStreamChunk>> InvokeStreamingAsync(InternalInvokeCommand command);
+
+    /// <summary>
+    /// Control plane → Gateway: evict cached sk- token resolutions so token edits
+    /// (channel/vendor-key, quota, status, expiry) take effect without waiting for the
+    /// cache TTL. Because resolutions are cached in <b>shared Redis</b>, a single gateway
+    /// node (reached via gwconsul round-robin) deleting the keys invalidates them fleet-wide,
+    /// so no broadcast is required. Returns the number of cache entries removed (best-effort).
+    /// </summary>
+    UnaryResult<int> InvalidateTokenCacheAsync(InvalidateTokenCacheCommand command);
 }
