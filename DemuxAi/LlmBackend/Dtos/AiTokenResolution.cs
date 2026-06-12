@@ -19,4 +19,6 @@ public sealed class AiTokenResolution
     [Key(9)] public string ModelBillingScope { get; set; } = "all";
     /// <summary>允许的 vendor slug 列表；空表示不限制通道。</summary>
     [Key(10)] public string[] ModelVendorKeys { get; set; } = [];
+    /// <summary>账户级速率限制（窗口 / 请求数 / 成功数 / 并发数）；账户覆盖优先于产品默认。</summary>
+    [Key(11)] public AiTokenRateLimit Rate { get; set; } = new();
 }
