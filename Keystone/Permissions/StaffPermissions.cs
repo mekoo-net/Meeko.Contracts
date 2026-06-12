@@ -30,6 +30,9 @@ public static class StaffPermissions
     public const string BillingChannelRead = "billing.channel.read";
     public const string BillingChannelWrite = "billing.channel.write";
 
+    public const string BillingVoucherRead = "billing.voucher.read";
+    public const string BillingVoucherWrite = "billing.voucher.write";
+
     public const string AccountAdminRead = "account.admin.read";
     public const string AccountAdminWrite = "account.admin.write";
 
@@ -45,6 +48,7 @@ public static class StaffPermissions
         BillingRechargeRead, BillingRechargeWrite,
         BillingBillRead, BillingBillWrite,
         BillingChannelRead, BillingChannelWrite,
+        BillingVoucherRead, BillingVoucherWrite,
         AccountAdminRead, AccountAdminWrite,
     ];
 
@@ -60,6 +64,7 @@ public static class StaffPermissions
         BillingRechargeRead,
         BillingBillRead,
         BillingChannelRead,
+        BillingVoucherRead,
         AccountAdminRead,
     ];
 }

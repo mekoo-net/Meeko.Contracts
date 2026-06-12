@@ -65,3 +65,38 @@ public enum ReferralWithdrawalMethod : short
     Alipay = 0,
     Bank = 1,
 }
+
+public enum VoucherDeductKind : short
+{
+    NoThreshold = 0,
+    FullReduction = 1,
+    Discount = 2,
+}
+
+public enum VoucherScopeKind : short
+{
+    AllProducts = 0,
+    SpecificProducts = 1,
+}
+
+public enum VoucherValidityKind : short
+{
+    Absolute = 0,
+    RelativeDays = 1,
+}
+
+public enum VoucherTemplateStatus : short
+{
+    Draft = 0,
+    Active = 1,
+    Paused = 2,
+    Archived = 3,
+}
+
+public enum UserVoucherStatus : short
+{
+    Unused = 0,
+    Used = 1,
+    Expired = 2,
+    Revoked = 3,
+}
