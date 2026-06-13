@@ -73,10 +73,23 @@ public enum VoucherDeductKind : short
     Discount = 2,
 }
 
+public enum VoucherApplyMode : short
+{
+    FirstPaymentOnly = 0,
+    EveryRenewal = 1,
+}
+
 public enum VoucherScopeKind : short
 {
     AllProducts = 0,
     SpecificProducts = 1,
+}
+
+public enum VoucherActivityStatus : short
+{
+    Active = 0,
+    Paused = 1,
+    Ended = 2,
 }
 
 public enum VoucherValidityKind : short
@@ -99,4 +112,17 @@ public enum UserVoucherStatus : short
     Used = 1,
     Expired = 2,
     Revoked = 3,
+}
+
+public enum VoucherRedeemCodeStatus : short
+{
+    Unused = 0,
+    Redeemed = 1,
+    Disabled = 2,
+}
+
+public enum VoucherCodeBatchStatus : short
+{
+    Active = 0,
+    Disabled = 1,
 }

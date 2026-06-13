@@ -22,4 +22,16 @@ public interface IBillingVoucherAdminService : IService<IBillingVoucherAdminServ
     UnaryResult<ListUserVouchersResult> ListUserVouchersAsync(ListUserVouchersQuery query);
 
     UnaryResult<ListVoucherRedemptionsResult> ListRedemptionsAsync(ListVoucherRedemptionsQuery query);
+
+    UnaryResult<VoucherActivityListResult> ListActivitiesAsync(ListVoucherActivitiesQuery query);
+
+    UnaryResult<VoucherActivityDto?> GetActivityAsync(long activityId);
+
+    UnaryResult<VoucherActivityDto> CreateActivityAsync(CreateVoucherActivityCommand cmd);
+
+    UnaryResult<VoucherActivityDto> UpdateActivityAsync(UpdateVoucherActivityCommand cmd);
+
+    UnaryResult<VoucherActivityDto> SetActivityStatusAsync(SetVoucherActivityStatusCommand cmd);
+
+    UnaryResult<ActivityClaimersResult> ListActivityClaimersAsync(ListActivityClaimersQuery query);
 }

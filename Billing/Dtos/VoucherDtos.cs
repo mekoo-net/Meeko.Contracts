@@ -9,6 +9,8 @@ public sealed class VoucherTemplateDto
 {
     [Key(0)] public required string Id { get; set; }
     [Key(1)] public required string Name { get; set; }
+    [Key(19)] public required string Code { get; set; }
+    [Key(20)] public VoucherApplyMode ApplyMode { get; set; }
     [Key(2)] public VoucherDeductKind DeductKind { get; set; }
     [Key(3)] public decimal FaceValue { get; set; }
     [Key(4)] public decimal ThresholdAmount { get; set; }
@@ -39,6 +41,7 @@ public sealed class CreateVoucherTemplateCommand
 {
     [Key(0)] public required string Name { get; set; }
     [Key(1)] public VoucherDeductKind DeductKind { get; set; }
+    [Key(14)] public VoucherApplyMode ApplyMode { get; set; }
     [Key(2)] public decimal FaceValue { get; set; }
     [Key(3)] public decimal ThresholdAmount { get; set; }
     [Key(4)] public decimal? DiscountRate { get; set; }
