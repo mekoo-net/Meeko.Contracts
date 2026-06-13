@@ -226,10 +226,12 @@ public sealed class AiUsageLogDto
     [Key(16)] public LogBillDto? Bill { get; set; }
     /// <summary>sk- 令牌快照；PG 直发（无令牌）时为 null。</summary>
     [Key(17)] public LogTokenDto? Token { get; set; }
-    /// <summary>请求命中的供应商（供应商组）。来自定价快照绑定，历史不丢。</summary>
+    /// <summary>请求命中的供应商（供应商组 / 内部 QueueGroup）。来自定价快照绑定，历史不丢。</summary>
     [Key(18)] public string? VendorKey { get; set; }
     /// <summary>请求命中的上游真实模型名（vendor_model）。来自别名快照绑定，历史不丢。</summary>
     [Key(19)] public string? VendorModel { get; set; }
+    /// <summary>对外公开通道 slug（如 nai / pa），由 <see cref="VendorKey"/> 反查 Vendor.VendorSlug 得到；供前端映射渠道展示名。未配置 slug 时为 null。</summary>
+    [Key(20)] public string? VendorPlug { get; set; }
 }
 
 [MessagePackObject]
