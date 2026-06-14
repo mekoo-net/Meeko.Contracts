@@ -154,8 +154,14 @@ public sealed class ListUserVouchersResult
     [Key(1)] public int Total { get; set; }
 }
 
+/// <summary>
+/// 券余额流水条目（append-only，对称于钱包 WalletTxn）。一条记录代表券的一次余额变动：
+/// 发放/预占/释放/抵扣/退回/过期/作废，由 <see cref="Kind"/> 区分，<see cref="Delta"/> 带符号、
+/// <see cref="BalanceAfter"/> 为写入后余额快照。账单相关字段（HoldId/Reference*/ProductCode/BillAmount）
+/// 仅在预占/释放/抵扣/退回类流水上有值，发放/过期/作废类为空。
+/// </summary>
 [MessagePackObject]
-public sealed class VoucherRedemptionDto
+public sealed class VoucherLedgerEntryDto
 {
     [Key(0)] public required string Id { get; set; }
 
@@ -167,26 +173,41 @@ public sealed class VoucherRedemptionDto
     [JsonConverter(typeof(LongToStringConverter))]
     public long AccountUid { get; set; }
 
-    /// <summary>所抵扣账单（Hold 落账单元）Id。</summary>
-    [Key(6)]
-    [JsonConverter(typeof(LongToStringConverter))]
-    public long HoldId { get; set; }
+    /// <summary>流水类型：发放/预占/释放/抵扣/退回/过期/作废。</summary>
+    [Key(3)] public VoucherLedgerKind Kind { get; set; }
+
+    /// <summary>带符号变动额（发放/释放/退回为正，预占/抵扣/过期/作废为负）；抵扣额取 <c>|Delta|</c>。</summary>
+    [Key(4)] public decimal Delta { get; set; }
+
+    /// <summary>本条流水写入后的券可用余额快照。</summary>
+    [Key(5)] public decimal BalanceAfter { get; set; }
+
+    [Key(6)] public DateTime OccurredAtUtc { get; set; }
+
+    /// <summary>所抵扣账单（Hold 落账单元）Id；非账单类流水为 null。</summary>
+    [Key(7)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? HoldId { get; set; }
 
     /// <summary>账单上游引用类型（快照）。</summary>
-    [Key(7)] public WalletTxnReferenceKind ReferenceKind { get; set; }
+    [Key(8)] public WalletTxnReferenceKind ReferenceKind { get; set; }
 
     /// <summary>账单上游引用 Id（快照），可空。</summary>
-    [Key(8)]
+    [Key(9)]
     [JsonConverter(typeof(NullableLongToStringConverter))]
     public long? ReferenceId { get; set; }
 
-    [Key(3)] public required string ProductCode { get; set; }
-    [Key(4)] public decimal AmountDeducted { get; set; }
+    /// <summary>抵扣/退回类流水关联的产品码；非账单类流水为 null。</summary>
+    [Key(10)] public string? ProductCode { get; set; }
 
-    /// <summary>该账单实付总额（快照），审计"抵扣 X / 账单 Y"。</summary>
-    [Key(9)] public decimal BillAmount { get; set; }
+    /// <summary>该账单实付总额（快照），审计"抵扣 X / 账单 Y"；非账单类为 0。</summary>
+    [Key(11)] public decimal BillAmount { get; set; }
+}
 
-    [Key(5)] public DateTime OccurredAtUtc { get; set; }
+[MessagePackObject]
+public sealed class ListVoucherLedgerResult
+{
+    [Key(0)] public VoucherLedgerEntryDto[] Items { get; set; } = [];
 }
 
 [MessagePackObject]
@@ -202,5 +223,5 @@ public sealed class ListVoucherRedemptionsQuery
 [MessagePackObject]
 public sealed class ListVoucherRedemptionsResult
 {
-    [Key(0)] public VoucherRedemptionDto[] Items { get; set; } = [];
+    [Key(0)] public VoucherLedgerEntryDto[] Items { get; set; } = [];
 }

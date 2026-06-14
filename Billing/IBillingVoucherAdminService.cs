@@ -23,11 +23,20 @@ public interface IBillingVoucherAdminService : IService<IBillingVoucherAdminServ
 
     UnaryResult<ListVoucherRedemptionsResult> ListRedemptionsAsync(ListVoucherRedemptionsQuery query);
 
+    /// <summary>账户维度完整券余额流水（含发放/预占/释放/抵扣/退回/过期/作废）。</summary>
+    UnaryResult<ListVoucherLedgerResult> ListLedgerAsync(ListVoucherRedemptionsQuery query);
+
     /// <summary>按券查其全部抵扣流水（审计："这张券都用在哪些账单"）。</summary>
     UnaryResult<ListVoucherRedemptionsResult> ListRedemptionsByVoucherAsync(long userVoucherId, int take);
 
+    /// <summary>按券查其完整余额流水。</summary>
+    UnaryResult<ListVoucherLedgerResult> ListLedgerByVoucherAsync(long userVoucherId, int take);
+
     /// <summary>按账单（Hold）查其全部券抵扣（审计："这张账单用了哪些券"）。</summary>
     UnaryResult<ListVoucherRedemptionsResult> ListRedemptionsByBillAsync(long holdId);
+
+    /// <summary>按账单（Hold）查其全部券流水（含预占/释放/抵扣/退回）。</summary>
+    UnaryResult<ListVoucherLedgerResult> ListLedgerByBillAsync(long holdId);
 
     UnaryResult<VoucherActivityListResult> ListActivitiesAsync(ListVoucherActivitiesQuery query);
 

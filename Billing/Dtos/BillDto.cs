@@ -29,4 +29,10 @@ public sealed class BillDto
     [Key(9)] public BillReversalInfo? Reversal { get; set; }
 
     [Key(10)] public DateTime OccurredAtUtc { get; set; }
+
+    /// <summary>本账单券抵扣总额（仅 commit 类账单有值）。</summary>
+    [Key(11)] public decimal VoucherDeducted { get; set; }
+
+    /// <summary>本账单各券抵扣明细。</summary>
+    [Key(12)] public BillVoucherDeductionDto[] VoucherItems { get; set; } = [];
 }

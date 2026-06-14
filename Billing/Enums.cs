@@ -114,6 +114,18 @@ public enum UserVoucherStatus : short
     Revoked = 3,
 }
 
+/// <summary>券余额流水类型（对称于钱包流水种类）。</summary>
+public enum VoucherLedgerKind : short
+{
+    Issue = 0,
+    Hold = 1,
+    Release = 2,
+    Redeem = 3,
+    Refund = 4,
+    Expire = 5,
+    Revoke = 6,
+}
+
 public enum VoucherRedeemCodeStatus : short
 {
     Unused = 0,
