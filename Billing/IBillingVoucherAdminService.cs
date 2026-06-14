@@ -5,7 +5,7 @@ namespace Meeko.Contracts.Billing;
 /// <summary>Bff → Billing：代金券批次管理、下发与查询。</summary>
 public interface IBillingVoucherAdminService : IService<IBillingVoucherAdminService>
 {
-    UnaryResult<VoucherTemplateListResult> ListTemplatesAsync(bool includeArchived = false);
+    UnaryResult<VoucherTemplateListResult> ListTemplatesAsync(ListVoucherTemplatesQuery query);
 
     UnaryResult<VoucherTemplateDto?> GetTemplateAsync(long templateId);
 

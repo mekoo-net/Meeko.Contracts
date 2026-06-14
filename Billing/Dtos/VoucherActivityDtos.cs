@@ -33,6 +33,7 @@ public sealed class VoucherActivityDto
 public sealed class VoucherActivityListResult
 {
     [Key(0)] public VoucherActivityDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
 }
 
 [MessagePackObject]
@@ -103,6 +104,8 @@ public sealed class ListVoucherActivitiesQuery
     public long? TemplateId { get; set; }
 
     [Key(1)] public bool IncludeEnded { get; set; }
+    [Key(2)] public int Page { get; set; } = 1;
+    [Key(3)] public int PageSize { get; set; } = 20;
 }
 
 [MessagePackObject]

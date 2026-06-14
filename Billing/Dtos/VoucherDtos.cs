@@ -31,9 +31,18 @@ public sealed class VoucherTemplateDto
 }
 
 [MessagePackObject]
+public sealed class ListVoucherTemplatesQuery
+{
+    [Key(0)] public bool IncludeArchived { get; set; }
+    [Key(1)] public int Page { get; set; } = 1;
+    [Key(2)] public int PageSize { get; set; } = 20;
+}
+
+[MessagePackObject]
 public sealed class VoucherTemplateListResult
 {
     [Key(0)] public VoucherTemplateDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
 }
 
 [MessagePackObject]
@@ -134,13 +143,15 @@ public sealed class ListUserVouchersQuery
     [JsonConverter(typeof(LongToStringConverter))]
     public long AccountUid { get; set; }
 
-    [Key(1)] public int Take { get; set; } = 100;
+    [Key(1)] public int Page { get; set; } = 1;
+    [Key(2)] public int PageSize { get; set; } = 20;
 }
 
 [MessagePackObject]
 public sealed class ListUserVouchersResult
 {
     [Key(0)] public UserVoucherDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
 }
 
 [MessagePackObject]
