@@ -42,4 +42,19 @@ public sealed class BillVoucherDeductionDto
 
     /// <summary>券抵扣类型：noThreshold（无门槛代金券）/ fullReduction（满减券）/ discount（折扣券）。</summary>
     [Key(4)] public string? DeductKind { get; set; }
+
+    /// <summary>券面额（发放时快照的初始可抵扣金额）。</summary>
+    [Key(5)] public decimal FaceValue { get; set; }
+
+    /// <summary>该券当前剩余可抵扣额（查询时刻快照，非本笔账单抵扣后的历史值）。</summary>
+    [Key(6)] public decimal RemainingValue { get; set; }
+
+    /// <summary>券有效期截止时间（UTC）。</summary>
+    [Key(7)] public DateTime ValidToUtc { get; set; }
+
+    /// <summary>使用门槛金额（满减/折扣券有意义，无门槛券为 0）。</summary>
+    [Key(8)] public decimal ThresholdAmount { get; set; }
+
+    /// <summary>折扣率（仅折扣券有值，区间 (0,1)）。</summary>
+    [Key(9)] public decimal? DiscountRate { get; set; }
 }
