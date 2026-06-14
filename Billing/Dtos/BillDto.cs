@@ -30,9 +30,6 @@ public sealed class BillDto
 
     [Key(10)] public DateTime OccurredAtUtc { get; set; }
 
-    /// <summary>本账单券抵扣总额（仅 commit 类账单有值）。</summary>
-    [Key(11)] public decimal VoucherDeducted { get; set; }
-
-    /// <summary>本账单各券抵扣明细。</summary>
-    [Key(12)] public BillVoucherDeductionDto[] VoucherItems { get; set; } = [];
+    /// <summary>扣费明细（代金券抵扣 / 余额扣除拆分）；仅用量扣费类账单有值，充值等为 null。</summary>
+    [Key(11)] public BillDeductionDto? Deduction { get; set; }
 }
