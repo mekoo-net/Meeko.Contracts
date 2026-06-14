@@ -167,8 +167,25 @@ public sealed class VoucherRedemptionDto
     [JsonConverter(typeof(LongToStringConverter))]
     public long AccountUid { get; set; }
 
+    /// <summary>所抵扣账单（Hold 落账单元）Id。</summary>
+    [Key(6)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long HoldId { get; set; }
+
+    /// <summary>账单上游引用类型（快照）。</summary>
+    [Key(7)] public WalletTxnReferenceKind ReferenceKind { get; set; }
+
+    /// <summary>账单上游引用 Id（快照），可空。</summary>
+    [Key(8)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? ReferenceId { get; set; }
+
     [Key(3)] public required string ProductCode { get; set; }
     [Key(4)] public decimal AmountDeducted { get; set; }
+
+    /// <summary>该账单实付总额（快照），审计"抵扣 X / 账单 Y"。</summary>
+    [Key(9)] public decimal BillAmount { get; set; }
+
     [Key(5)] public DateTime OccurredAtUtc { get; set; }
 }
 
