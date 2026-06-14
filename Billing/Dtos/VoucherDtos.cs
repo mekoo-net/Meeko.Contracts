@@ -145,6 +145,9 @@ public sealed class ListUserVouchersQuery
 
     [Key(1)] public int Page { get; set; } = 1;
     [Key(2)] public int PageSize { get; set; } = 20;
+
+    /// <summary>按券状态筛选；缺省表示全部（含已过期）。</summary>
+    [Key(3)] public UserVoucherStatus? Status { get; set; }
 }
 
 [MessagePackObject]
@@ -152,6 +155,12 @@ public sealed class ListUserVouchersResult
 {
     [Key(0)] public UserVoucherDto[] Items { get; set; } = [];
     [Key(1)] public int Total { get; set; }
+
+    /// <summary>当前账户在有效期内、有余额且未使用的券张数（全量合计，不受列表筛选影响）。</summary>
+    [Key(2)] public int UsableCount { get; set; }
+
+    /// <summary>上述可用券剩余可抵扣总额（全量合计，不受列表筛选影响）。</summary>
+    [Key(3)] public decimal RemainingTotal { get; set; }
 }
 
 /// <summary>
@@ -202,6 +211,9 @@ public sealed class VoucherLedgerEntryDto
 
     /// <summary>该账单实付总额（快照），审计"抵扣 X / 账单 Y"；非账单类为 0。</summary>
     [Key(11)] public decimal BillAmount { get; set; }
+
+    /// <summary>关联账单流水号（Commit WalletTxn.SerialNo），无关联账单时为 null。</summary>
+    [Key(12)] public string? BillSerial { get; set; }
 }
 
 [MessagePackObject]
@@ -218,10 +230,24 @@ public sealed class ListVoucherRedemptionsQuery
     public long AccountUid { get; set; }
 
     [Key(1)] public int Take { get; set; } = 100;
+
+    [Key(2)] public int Page { get; set; } = 1;
+
+    [Key(3)] public int PageSize { get; set; }
+
+    /// <summary>按用户券筛选；0 或缺省表示全部。</summary>
+    [Key(4)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long UserVoucherId { get; set; }
 }
 
 [MessagePackObject]
 public sealed class ListVoucherRedemptionsResult
 {
     [Key(0)] public VoucherLedgerEntryDto[] Items { get; set; } = [];
+
+    [Key(1)] public int Total { get; set; }
+
+    /// <summary>筛选范围内累计抵扣额（全量合计，非仅当前页）。</summary>
+    [Key(2)] public decimal DeductedTotal { get; set; }
 }
