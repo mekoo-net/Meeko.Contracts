@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Meeko.Common.Web;
+using Meeko.Contracts.Keystone;
 using MessagePack;
 
 namespace Meeko.Contracts.Billing;
@@ -52,12 +53,16 @@ public sealed class ActivityClaimerDto
     [Key(3)] public DateTime ClaimedAtUtc { get; set; }
     [Key(4)] public string? ClaimIp { get; set; }
     [Key(5)] public UserVoucherStatus Status { get; set; }
+
+    /// <summary>账户联系信息，由 Bff 按当前页 uid 批量补全（Billing 侧留空）。</summary>
+    [Key(6)] public AccountContactDto? Contact { get; set; }
 }
 
 [MessagePackObject]
 public sealed class ActivityClaimersResult
 {
     [Key(0)] public ActivityClaimerDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
 }
 
 [MessagePackObject]
@@ -115,5 +120,11 @@ public sealed class ListActivityClaimersQuery
     [JsonConverter(typeof(LongToStringConverter))]
     public long ActivityId { get; set; }
 
-    [Key(1)] public int Take { get; set; } = 1000;
+    [Key(1)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? AccountUid { get; set; }
+
+    [Key(2)] public UserVoucherStatus? Status { get; set; }
+    [Key(3)] public int Page { get; set; } = 1;
+    [Key(4)] public int PageSize { get; set; } = 20;
 }

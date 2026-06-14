@@ -13,4 +13,7 @@ public sealed class AccountContactDto
     [Key(1)] public string? DisplayName { get; set; }
     [Key(2)] public string? Email { get; set; }
     [Key(3)] public string? Phone { get; set; }
+
+    /// <summary>账户类型（personal / organization），供需要展示账户身份的列表 enrich。</summary>
+    [Key(4)] public string? AccountType { get; set; }
 }
