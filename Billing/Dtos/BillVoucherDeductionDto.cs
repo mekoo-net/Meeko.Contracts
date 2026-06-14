@@ -36,4 +36,10 @@ public sealed class BillVoucherDeductionDto
     [Key(2)] public string? SerialNo { get; set; }
 
     [Key(1)] public decimal AmountDeducted { get; set; }
+
+    /// <summary>券名称（取自券模板，发放后快照展示用），便于一眼看出用的是哪张券。</summary>
+    [Key(3)] public string? Name { get; set; }
+
+    /// <summary>券抵扣类型：noThreshold（无门槛代金券）/ fullReduction（满减券）/ discount（折扣券）。</summary>
+    [Key(4)] public string? DeductKind { get; set; }
 }
