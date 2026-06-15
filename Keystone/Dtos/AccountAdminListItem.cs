@@ -17,6 +17,10 @@ public sealed class AccountAdminListItem
     [Key(9)] public string[] AchievementCodes { get; set; } = [];
 
     [Key(4)] public AccountOwnerInfo? Owner { get; set; }
+
+    /// <summary>邀请人（返利关系）联系信息：展示名 / 邮箱 / 手机；自然注册为 null。Key 顺延以兼容旧消息，声明位置就近 Owner。</summary>
+    [Key(10)] public AccountContactDto? Inviter { get; set; }
+
     [Key(5)] public int IamUserCount { get; set; }
     [Key(6)] public DateTime CreatedAtUtc { get; set; }
     [Key(7)] public DateTime? LastActiveAtUtc { get; set; }

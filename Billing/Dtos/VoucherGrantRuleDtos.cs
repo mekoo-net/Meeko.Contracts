@@ -88,21 +88,3 @@ public sealed class ListVoucherGrantRulesQuery
     [Key(3)] public int PageSize { get; set; } = 20;
 }
 
-/// <summary>
-/// 外部业务方（如 Keystone 注册流程）投递的触发事件，喂给 Billing 自动发券引擎。
-/// <see cref="EventKey"/> 决定去重粒度（账户级 / 单笔级）。
-/// </summary>
-[MessagePackObject]
-public sealed class GrantEventCommand
-{
-    [Key(0)] public required string EventType { get; set; }
-    [Key(1)] public required string EventKey { get; set; }
-
-    [Key(2)]
-    [JsonConverter(typeof(LongToStringConverter))]
-    public long AccountUid { get; set; }
-
-    [Key(3)] public decimal? Amount { get; set; }
-    [Key(4)] public string? ProductCode { get; set; }
-    [Key(5)] public DateTime? OccurredAtUtc { get; set; }
-}
