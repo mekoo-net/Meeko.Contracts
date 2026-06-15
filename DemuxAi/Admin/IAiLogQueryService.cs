@@ -7,6 +7,12 @@ public interface IAiLogQueryService : IService<IAiLogQueryService>
 {
     UnaryResult<ListAiLogsResult> ListAsync(ListAiLogsQuery query);
     UnaryResult<AiUsageLogDto?> GetAsync(long id);
+
+    /// <summary>
+    /// 批量把 request_id 解析为调用日志号（UsageLog.Id）。供产品域据账单流水的 request_id
+    /// 反查发起它的调用日志；未命中的 request_id 不出现在结果里。
+    /// </summary>
+    UnaryResult<LogRequestRefDto[]> ResolveLogIdsByRequestIdsAsync(string[] requestIds);
     UnaryResult<AiLogStatDto[]> StatDailyAsync(AiLogStatQuery query);
     UnaryResult<AiVendorStatDto[]> StatByVendorAsync(AiVendorStatQuery query);
 
