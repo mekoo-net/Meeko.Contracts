@@ -7,7 +7,11 @@ public interface IBillingMeteringService : IService<IBillingMeteringService>
 {
     UnaryResult<HoldResult> TryHoldAsync(HoldRequest request);
 
-    UnaryResult<bool> CommitHoldAsync(long holdId, decimal actualAmount, string idempotencyKey);
+    /// <summary>
+    /// 提交预扣并落账。返回的 <see cref="CommitHoldResult.BillSerialNo"/> 为本次 Commit 流水号（账单号），
+    /// 供产品域把业务日志单向引用到账单（写入 UsageLog.BillSerialNo）。
+    /// </summary>
+    UnaryResult<CommitHoldResult> CommitHoldAsync(long holdId, decimal actualAmount, string idempotencyKey);
 
     UnaryResult<bool> ReleaseHoldAsync(long holdId, string reason);
 

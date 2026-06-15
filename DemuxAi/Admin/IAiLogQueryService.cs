@@ -9,10 +9,10 @@ public interface IAiLogQueryService : IService<IAiLogQueryService>
     UnaryResult<AiUsageLogDto?> GetAsync(long id);
 
     /// <summary>
-    /// 批量把 request_id 解析为调用日志号（UsageLog.Id）。供产品域据账单流水的 request_id
-    /// 反查发起它的调用日志；未命中的 request_id 不出现在结果里。
+    /// 批量把账单号（Commit 流水号）解析为调用日志号（UsageLog.Id）。供 BFF 据账单自身流水号
+    /// 反查发起它的调用日志，组装账单详情「业务号」；未命中的账单号不出现在结果里。
     /// </summary>
-    UnaryResult<LogRequestRefDto[]> ResolveLogIdsByRequestIdsAsync(string[] requestIds);
+    UnaryResult<LogBillRefDto[]> ResolveLogIdsByBillSerialsAsync(string[] billSerialNos);
     UnaryResult<AiLogStatDto[]> StatDailyAsync(AiLogStatQuery query);
     UnaryResult<AiVendorStatDto[]> StatByVendorAsync(AiVendorStatQuery query);
 

@@ -382,16 +382,16 @@ public sealed class ReverseAiLogResult
 }
 
 /// <summary>
-/// request_id → 用量日志号映射行。产品域据账单流水的 request_id 反查发起它的调用日志，
-/// 把日志号回填到账单详情的「业务号」。
+/// 账单号 → 用量日志号映射行。BFF 据账单自身的流水号（账单号）反查发起它的调用日志，
+/// 把日志号组装进账单详情的「业务号」。基于 UsageLog.BillSerialNo（Commit 时单向落库）。
 /// </summary>
 [MessagePackObject]
-public sealed class LogRequestRefDto
+public sealed class LogBillRefDto
 {
-    /// <summary>调用日志的请求幂等键（= UsageLog.RequestId，= 账单 Commit 流水 IdempotencyKey）。</summary>
-    [Key(0)] public required string RequestId { get; set; }
+    /// <summary>账单域 Commit 流水号（账单号，= UsageLog.BillSerialNo）。</summary>
+    [Key(0)] public required string BillSerialNo { get; set; }
 
-    /// <summary>对应的调用日志号（UsageLog.Id，snowflake）。对外以字符串返回，避免 JS 精度丢失。</summary>
+    /// <summary>发起该账单扣费的调用日志号（UsageLog.Id，snowflake）。对外以字符串返回，避免 JS 精度丢失。</summary>
     [Key(1)]
     [System.Text.Json.Serialization.JsonConverter(typeof(Meeko.Common.Web.LongToStringConverter))]
     public long LogId { get; set; }
