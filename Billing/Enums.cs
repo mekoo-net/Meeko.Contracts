@@ -138,3 +138,16 @@ public enum VoucherCodeBatchStatus : short
     Active = 0,
     Disabled = 1,
 }
+
+public enum VoucherGrantRuleStatus : short
+{
+    Active = 0,
+    Paused = 1,
+    Ended = 2,
+}
+
+public enum GrantConditionKind : short
+{
+    Immediate = 0,
+    EventAmountAtLeast = 1,
+}
