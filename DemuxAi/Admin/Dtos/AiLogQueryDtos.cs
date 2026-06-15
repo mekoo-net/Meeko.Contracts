@@ -396,3 +396,39 @@ public sealed class LogBillRefDto
     [System.Text.Json.Serialization.JsonConverter(typeof(Meeko.Common.Web.LongToStringConverter))]
     public long LogId { get; set; }
 }
+
+/// <summary>
+/// 账单号 → 调用日志摘要行。供 BFF 据账单流水号反查发起它的调用日志，把渠道 / 模型 / 计费 /
+/// 用量 / 耗时等日志侧字段回填进账户自助账单列表（账单域不感知这些产品域字段）。
+/// 基于 UsageLog.BillSerialNo（Commit 时单向落库）；一个账单号对应一条日志，重复取最新。
+/// </summary>
+[MessagePackObject]
+public sealed class LogBillSummaryDto
+{
+    /// <summary>账单域 Commit 流水号（账单号，= UsageLog.BillSerialNo）。</summary>
+    [Key(0)] public required string BillSerialNo { get; set; }
+
+    /// <summary>发起该账单扣费的调用日志号（UsageLog.Id，snowflake）。对外以字符串返回，避免 JS 精度丢失。</summary>
+    [Key(1)]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Meeko.Common.Web.LongToStringConverter))]
+    public long LogId { get; set; }
+
+    /// <summary>对外模型别名（alias）；快照缺失时为 null。</summary>
+    [Key(2)] public string? ModelName { get; set; }
+
+    /// <summary>对外渠道 slug（VendorSlug，如 nai / pa），供前端映射渠道展示名；未配置时为 null。</summary>
+    [Key(3)] public string? VendorPlug { get; set; }
+
+    /// <summary>计费类型：per_token / per_call / per_image / per_video / per_audio_minute / per_character。</summary>
+    [Key(4)] public string BillingType { get; set; } = "unknown";
+
+    [Key(5)] public int TotalTokens { get; set; }
+    [Key(6)] public int InputTokens { get; set; }
+    [Key(7)] public int CachedReadTokens { get; set; }
+    [Key(8)] public int CachedWriteTokens { get; set; }
+    [Key(9)] public int OutputTokens { get; set; }
+    [Key(10)] public int ReasoningTokens { get; set; }
+
+    /// <summary>调用耗时（ms）；仅成功调用有值。</summary>
+    [Key(11)] public int? LatencyMs { get; set; }
+}

@@ -13,6 +13,12 @@ public interface IAiLogQueryService : IService<IAiLogQueryService>
     /// 反查发起它的调用日志，组装账单详情「业务号」；未命中的账单号不出现在结果里。
     /// </summary>
     UnaryResult<LogBillRefDto[]> ResolveLogIdsByBillSerialsAsync(string[] billSerialNos);
+
+    /// <summary>
+    /// 批量把账单号（Commit 流水号）解析为调用日志摘要（渠道 / 模型 / 计费 / 用量 / 耗时）。
+    /// 供 BFF 把日志侧字段回填进账户自助账单列表；未命中的账单号不出现在结果里。
+    /// </summary>
+    UnaryResult<LogBillSummaryDto[]> ResolveLogSummariesByBillSerialsAsync(string[] billSerialNos);
     UnaryResult<AiLogStatDto[]> StatDailyAsync(AiLogStatQuery query);
     UnaryResult<AiVendorStatDto[]> StatByVendorAsync(AiVendorStatQuery query);
 
