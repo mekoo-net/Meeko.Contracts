@@ -1,3 +1,4 @@
+using Meeko.Contracts.Keystone;
 using MessagePack;
 
 namespace Meeko.Contracts.Billing;
@@ -7,12 +8,6 @@ public sealed class BillOwnerInfo
 {
     [Key(0)] public required long AccountUid { get; set; }
 
-    /// <summary>BFF enrich：账户展示名。</summary>
-    [Key(1)] public string? DisplayName { get; set; }
-
-    /// <summary>BFF enrich：Owner 联系邮箱。</summary>
-    [Key(2)] public string? Email { get; set; }
-
-    /// <summary>BFF enrich：Owner 联系手机。</summary>
-    [Key(3)] public string? Phone { get; set; }
+    /// <summary>账户身份与联系信息（展示名 / 邮箱 / 手机 / 类型）；由 BFF 按 uid 批量 enrich，统一嵌套 <see cref="AccountContactDto"/>。</summary>
+    [Key(1)] public AccountContactDto? Contact { get; set; }
 }

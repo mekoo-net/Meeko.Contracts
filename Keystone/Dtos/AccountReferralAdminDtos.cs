@@ -6,8 +6,9 @@ namespace Meeko.Contracts.Keystone.Dtos;
 public sealed class AccountReferralAdminWireDto
 {
     [Key(0)] public long AccountUid { get; set; }
-    [Key(1)] public long? InviterAccountUid { get; set; }
-    [Key(2)] public string? InviterDisplayName { get; set; }
-    [Key(3)] public string? InviterEmail { get; set; }
+
+    /// <summary>邀请人（返利上线）身份与联系信息；自然注册为 null。统一嵌套 <see cref="AccountContactDto"/>，不再展平。</summary>
+    [Key(1)] public AccountContactDto? Inviter { get; set; }
+
     [Key(4)] public int InviteCount { get; set; }
 }

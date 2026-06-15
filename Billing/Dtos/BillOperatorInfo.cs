@@ -1,3 +1,4 @@
+using Meeko.Contracts.Keystone;
 using MessagePack;
 
 namespace Meeko.Contracts.Billing;
@@ -10,12 +11,6 @@ public sealed class BillOperatorInfo
     /// <summary>区分席位时使用；当前 WalletTxn 没存 IAM 用户上下文，返回 null。</summary>
     [Key(1)] public long? IamUserUid { get; set; }
 
-    /// <summary>BFF enrich：账户展示名。</summary>
-    [Key(2)] public string? DisplayName { get; set; }
-
-    /// <summary>BFF enrich：Owner 联系邮箱。</summary>
-    [Key(3)] public string? Email { get; set; }
-
-    /// <summary>BFF enrich：Owner 联系手机。</summary>
-    [Key(4)] public string? Phone { get; set; }
+    /// <summary>操作者账户身份与联系信息；由 BFF 按 uid 批量 enrich，统一嵌套 <see cref="AccountContactDto"/>。</summary>
+    [Key(2)] public AccountContactDto? Contact { get; set; }
 }
