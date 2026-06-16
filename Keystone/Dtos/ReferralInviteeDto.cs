@@ -13,4 +13,10 @@ public sealed class ReferralInviteeDto
     [Key(3)] public DateTime RegisteredAtUtc { get; set; }
 
     [Key(4)] public string Status { get; set; } = "active";
+
+    /// <summary>被邀请账户 Owner 的最近登录时间（任一登录刷新）；无登录记录时为 null。</summary>
+    [Key(5)] public DateTime? LastLoginAtUtc { get; set; }
+
+    /// <summary>被邀请账户 Owner 的最近登录 IP；无登录记录时为 null。</summary>
+    [Key(6)] public string? LastLoginIp { get; set; }
 }
