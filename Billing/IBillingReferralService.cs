@@ -14,6 +14,9 @@ public interface IBillingReferralService : IService<IBillingReferralService>
 
     UnaryResult<ReferralWithdrawalDto> CreateWithdrawalAsync(CreateReferralWithdrawalCommand cmd);
 
+    /// <summary>用户撤销待审核的提现申请，冻结金额退回可提现余额。</summary>
+    UnaryResult<ReferralWithdrawalDto> CancelWithdrawalAsync(CancelReferralWithdrawalCommand cmd);
+
     UnaryResult<ListReferralWithdrawalsAdminResult> ListWithdrawalsAdminAsync(ListReferralWithdrawalsAdminQuery query);
 
     UnaryResult<ReferralWithdrawalDto> ApproveWithdrawalAsync(long withdrawalId);
@@ -21,6 +24,9 @@ public interface IBillingReferralService : IService<IBillingReferralService>
     UnaryResult<ReferralWithdrawalDto> RejectWithdrawalAsync(RejectReferralWithdrawalCommand cmd);
 
     UnaryResult<ReferralWithdrawalDto> MarkWithdrawalPaidAsync(long withdrawalId);
+
+    /// <summary>运营标记打款失败（审核通过后），冻结金额退回可提现余额，用户可重新申请。</summary>
+    UnaryResult<ReferralWithdrawalDto> MarkWithdrawalFailedAsync(RejectReferralWithdrawalCommand cmd);
 
     /// <summary>列出可参与返利的业务域（来自 products 表去重 domain）。</summary>
     UnaryResult<ReferralProductListResult> ListReferralProductsAsync();
