@@ -23,4 +23,10 @@ public sealed class RechargeDto
     [Key(6)] public DateTime CreatedAtUtc { get; set; }
 
     [Key(7)] public DateTime? PaidAtUtc { get; set; }
+
+    /// <summary>支付凭证；详情接口填充，列表为 null。</summary>
+    [Key(8)] public RechargePaymentInfo? Payment { get; set; }
+
+    /// <summary>审计信息；详情接口填充，列表为 null。</summary>
+    [Key(9)] public RechargeAuditInfo? Audit { get; set; }
 }

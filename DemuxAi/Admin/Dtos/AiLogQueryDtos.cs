@@ -343,6 +343,25 @@ public sealed class AiProviderStatDto
     [Key(4)] public string? ProviderName { get; set; }
 }
 
+/// <summary>错误码分布行（仅失败调用，按出现次数降序）。</summary>
+[MessagePackObject]
+public sealed class AiErrorCodeStatDto
+{
+    /// <summary>上游 / 网关错误码；缺失时为 <c>unknown</c>。</summary>
+    [Key(0)] public string Code { get; set; } = "unknown";
+    [Key(1)] public int Count { get; set; }
+}
+
+/// <summary>区间内首字延迟（TTFT）汇总：仅 streamed + success 样本入聚合。</summary>
+[MessagePackObject]
+public sealed class AiLatencyStatDto
+{
+    /// <summary>平均首字延迟（ms）。无样本时为 0。</summary>
+    [Key(0)] public int AvgTokenLatencyMs { get; set; }
+    /// <summary>P95 首字延迟（ms）。无样本时为 0。</summary>
+    [Key(1)] public int P95TokenLatencyMs { get; set; }
+}
+
 [MessagePackObject]
 public sealed class ReverseAiLogCommand
 {

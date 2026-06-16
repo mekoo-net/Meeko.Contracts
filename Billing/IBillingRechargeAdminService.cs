@@ -12,6 +12,11 @@ public interface IBillingRechargeAdminService : IService<IBillingRechargeAdminSe
 
     UnaryResult<RechargeDto?> GetRechargeAsync(long rechargeUid);
 
+    UnaryResult<RechargeDto?> GetRechargeBySerialAsync(string serialNo);
+
     /// <summary>Admin 内部入账：单事务创建充值记录并给钱包加余额。</summary>
     UnaryResult<RechargeDto> CreateInternalAsync(CreateInternalRechargeCommand cmd);
+
+    /// <summary>管理员手工确认待支付充值单入账（含三方支付掉单补录）。</summary>
+    UnaryResult<RechargeDto> ConfirmManualAsync(ConfirmManualRechargeCommand cmd);
 }
