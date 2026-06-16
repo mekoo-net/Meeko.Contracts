@@ -17,6 +17,8 @@ public sealed class AccountAdminDetail
     [Key(5)] public int IamUserCount { get; set; }
     [Key(6)] public DateTime CreatedAtUtc { get; set; }
     [Key(7)] public DateTime UpdatedAtUtc { get; set; }
-    [Key(8)] public DateTime? LastActiveAtUtc { get; set; }
     [Key(9)] public AccountAchievementDto[] Achievements { get; set; } = [];
+
+    /// <summary>最近活跃信息（时间 + 来源 IP）；账户从未登录时为 null。</summary>
+    [Key(11)] public AccountActiveInfo? Active { get; set; }
 }
