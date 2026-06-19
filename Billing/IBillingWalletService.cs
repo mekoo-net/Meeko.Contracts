@@ -12,6 +12,9 @@ public interface IBillingWalletService : IService<IBillingWalletService>
 
     UnaryResult<RechargeIntent> CreateRechargeAsync(CreateRechargeCommand cmd);
 
+    /// <summary>拉取聚合渠道（发卡付）的收款选项：商品（固定金额档位）+ 支付渠道，供下单页展示。</summary>
+    UnaryResult<FkPayOptionsDto> GetRechargeOptionsAsync(string provider);
+
     /// <summary>仅 notify HTTP 回调内部使用，幂等。</summary>
     UnaryResult<bool> ConfirmRechargeAsync(string outTradeNo);
 

@@ -22,4 +22,10 @@ public sealed class CreateRechargeCommand
 
     /// <summary>充值归属产品代码（如 demux）。</summary>
     [Key(9)] public string? ProductCode { get; set; }
+
+    /// <summary>
+    /// 渠道专属下单参数（JSON）。通用充值流程不感知其结构，由对应渠道自行解析。
+    /// 发卡付示例：<c>{"backendId":1,"goodsKey":"uacyrv","channelId":1}</c>
+    /// </summary>
+    [Key(10)] public string? Payload { get; set; }
 }
