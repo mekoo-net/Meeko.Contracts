@@ -24,4 +24,10 @@ public sealed class ReserveQuotaCommand
 
     /// <summary>渠道键（NATS 队列组）。与 <see cref="ModelName"/>(别名) 共同定位定价行——别名可跨渠道重名。</summary>
     [Key(10)] public string VendorKey { get; set; } = string.Empty;
+
+    /// <summary>
+    /// W3C trace id（32 位十六进制）。reserve 时即上报并随预扣行落库，
+    /// 这样即便请求最终失败 / 未 commit，也能凭该 trace id 反查网关侧分布式 trace 定位报错原因。
+    /// </summary>
+    [Key(11)] public string? TraceId { get; set; }
 }

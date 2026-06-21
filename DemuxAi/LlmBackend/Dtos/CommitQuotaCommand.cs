@@ -27,8 +27,8 @@ public sealed class CommitQuotaCommand
     [Key(15)] public long? IamUserUid { get; set; }
     [Key(16)] public string? ErrorCode { get; set; }
     [Key(17)] public string? ErrorMessage { get; set; }
-    /// <summary>W3C trace id（32 位十六进制）。把这条计费记录关联回网关请求的分布式 trace。</summary>
-    [Key(18)] public string? TraceId { get; set; }
+    // Key(18) 曾是 TraceId：已下沉到 reserve 阶段（ReserveQuotaCommand.TraceId）随预扣行落库，
+    // commit 按 ReservationId 更新同一行即可，无需重复上报。保留空位避免 key 重排。
 
     /// <summary>渠道键（NATS 队列组）。与 <see cref="ModelName"/>(别名) 共同定位定价行——别名可跨渠道重名。</summary>
     [Key(19)] public string VendorKey { get; set; } = string.Empty;
