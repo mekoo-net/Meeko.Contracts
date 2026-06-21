@@ -16,8 +16,11 @@ public sealed class CommitQuotaCommand
     [Key(6)]  public int LatencyMs { get; set; }
     [Key(7)]  public int? ChannelIdExternal { get; set; }
     [Key(8)]  public string? ClientIp { get; set; }
-    /// <summary>幂等键。同一键多次调用只落账一次。</summary>
-    [Key(9)]  public string RequestId { get; set; } = string.Empty;
+    /// <summary>
+    /// W3C trace id（32 位十六进制），与 reserve 阶段同一值（同一请求内 trace 不变）。
+    /// 充当幂等键：同一 trace 多次 commit 只落账一次；commit 按 ReservationId 更新 reserve 落的同一行。
+    /// </summary>
+    [Key(9)]  public string TraceId { get; set; } = string.Empty;
     /// <summary>上游返回的额外字段（model_returned 等），原文 JSON 透传到 usage_logs.extra。</summary>
     [Key(10)] public string? ExtraJson { get; set; }
     [Key(11)] public int? ProviderId { get; set; }
