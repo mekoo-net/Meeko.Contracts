@@ -232,6 +232,8 @@ public sealed class AiUsageLogDto
     [Key(19)] public string? VendorModel { get; set; }
     /// <summary>对外公开通道 slug（如 nai / pa），由 <see cref="VendorKey"/> 反查 Vendor.VendorSlug 得到；供前端映射渠道展示名。未配置 slug 时为 null。</summary>
     [Key(20)] public string? VendorPlug { get; set; }
+    /// <summary>请求链路 TraceId（幂等键 / 账单 idempotency_key）。</summary>
+    [Key(21)] public string? TraceId { get; set; }
 }
 
 [MessagePackObject]
@@ -254,6 +256,14 @@ public sealed class ListAiLogsQuery
     [Key(13)] public string? ErrorCode { get; set; }
     /// <summary>按供应商（供应商组）过滤；匹配定价快照绑定的 vendor_key。</summary>
     [Key(14)] public string? VendorKey { get; set; }
+    /// <summary>调用日志号（UsageLog.Id）精确匹配。</summary>
+    [Key(15)] public long? LogId { get; set; }
+    /// <summary>账单 UID（Commit 流水号 / bill.id）精确匹配。</summary>
+    [Key(16)] public string? BillSerialNo { get; set; }
+    /// <summary>邮箱 / 手机 / 昵称模糊匹配；先经 Keystone 解析为 account_uid 集合再筛日志。</summary>
+    [Key(17)] public string? ContactKeyword { get; set; }
+    /// <summary>TraceId 精确匹配（UsageLog.trace_id）。</summary>
+    [Key(18)] public string? TraceId { get; set; }
 }
 
 [MessagePackObject]
