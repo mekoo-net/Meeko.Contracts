@@ -13,4 +13,11 @@ public interface ILlmTokenService : IService<ILlmTokenService>
 
     /// <summary>批量预热（LLM 后端启动 / 缓存大面积失效时一次拉回）。</summary>
     UnaryResult<AiTokenResolution[]> ResolveBatchAsync(string[] keyHashes);
+
+    /// <summary>
+    /// 同步平台级 IP 速率限制策略（版本号条件拉取）：网关带上已知版本号，
+    /// 未变更时仅回版本号（<see cref="IpRatePolicySyncDto.Policy"/> 为 null），
+    /// 变更时下发完整快照。首次同步传 <c>0</c> 即得全量。
+    /// </summary>
+    UnaryResult<IpRatePolicySyncDto> SyncIpRatePolicyAsync(long knownVersion);
 }

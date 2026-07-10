@@ -13,4 +13,12 @@ public static class InternalChunkType
     public const byte Usage = 2;
     /// <summary>Upstream or gateway error. Read <see cref="InternalStreamChunk.ErrorMessage"/>.</summary>
     public const byte Error = 3;
+
+    /// <summary>
+    /// Function/tool call (possibly incremental). Read FunctionName / FunctionCallId /
+    /// FunctionArguments. A chunk with a non-null FunctionName starts a new call;
+    /// chunks with only FunctionArguments append to the current call.
+    /// The stream still ends with one <see cref="Done"/> chunk after tool calls.
+    /// </summary>
+    public const byte FunctionCall = 4;
 }
