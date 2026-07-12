@@ -36,6 +36,9 @@ public static class StaffPermissions
     public const string AccountAdminRead = "account.admin.read";
     public const string AccountAdminWrite = "account.admin.write";
 
+    public const string StorageBackendRead = "storage.backend.read";
+    public const string StorageBackendWrite = "storage.backend.write";
+
     /// <summary>所有 Staff 平台权限码的完整集合，用于 seed SuperAdmin。</summary>
     public static readonly IReadOnlyCollection<string> All =
     [
@@ -50,6 +53,7 @@ public static class StaffPermissions
         BillingChannelRead, BillingChannelWrite,
         BillingVoucherRead, BillingVoucherWrite,
         AccountAdminRead, AccountAdminWrite,
+        StorageBackendRead, StorageBackendWrite,
     ];
 
     /// <summary>只读子集（用于 seed ReadOnly 角色）。</summary>
@@ -66,5 +70,6 @@ public static class StaffPermissions
         BillingChannelRead,
         BillingVoucherRead,
         AccountAdminRead,
+        StorageBackendRead,
     ];
 }
