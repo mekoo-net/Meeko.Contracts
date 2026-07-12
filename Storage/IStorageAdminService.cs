@@ -17,4 +17,7 @@ public interface IStorageAdminService : IService<IStorageAdminService>
 
     /// <summary>对象引用溯源：这个文件是谁存的、什么时候存的、现在有哪些账号在引用（含已释放的历史引用）。</summary>
     UnaryResult<StorageObjectRefsResult> ListObjectRefsAsync(string storageKey);
+
+    /// <summary>各存储后端的用量与运行状态汇总。</summary>
+    UnaryResult<StorageOverviewDto> GetOverviewAsync();
 }
