@@ -12,7 +12,8 @@ public sealed class StorageBackendDto
     [Key(4)]  public string Region { get; set; } = string.Empty;
     [Key(5)]  public string Bucket { get; set; } = string.Empty;
     [Key(6)]  public string? PublicEndpoint { get; set; }
-    [Key(7)]  public string? CdnBaseUrl { get; set; }
+    [Key(7)]  public string? CdnStaticBaseUrl { get; set; }
+    [Key(15)] public string? CdnStoreBaseUrl { get; set; }
     [Key(8)]  public string AccessKeyId { get; set; } = string.Empty;
     [Key(9)]  public bool AccessKeySecretConfigured { get; set; }
     [Key(10)] public string? LocalRoot { get; set; }

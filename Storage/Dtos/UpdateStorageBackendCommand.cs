@@ -12,7 +12,8 @@ public sealed class UpdateStorageBackendCommand
     [Key(4)]  public string Region { get; set; } = string.Empty;
     [Key(5)]  public string Bucket { get; set; } = string.Empty;
     [Key(6)]  public string? PublicEndpoint { get; set; }
-    [Key(7)]  public string? CdnBaseUrl { get; set; }
+    [Key(7)]  public string? CdnStaticBaseUrl { get; set; }
+    [Key(13)] public string? CdnStoreBaseUrl { get; set; }
     [Key(8)]  public string AccessKeyId { get; set; } = string.Empty;
     /// <summary>非 null 则更新密钥；null 表示保留旧值。</summary>
     [Key(9)]  public string? AccessKeySecret { get; set; }
