@@ -18,6 +18,12 @@ public interface IStorageAdminService : IService<IStorageAdminService>
     /// <summary>对象引用溯源：这个文件是谁存的、什么时候存的、现在有哪些账号在引用（含已释放的历史引用）。</summary>
     UnaryResult<StorageObjectRefsResult> ListObjectRefsAsync(string storageKey);
 
+    /// <summary>分页浏览存储对象（含引用聚合与公开 URL）。</summary>
+    UnaryResult<ListStorageObjectsResult> ListObjectsAsync(ListStorageObjectsQuery query);
+
+    /// <summary>按路径前缀浏览（类 S3 ListObjectsV2 + Delimiter，返回子目录与当前层文件）。</summary>
+    UnaryResult<BrowseStorageObjectsResult> BrowseObjectsAsync(BrowseStorageObjectsQuery query);
+
     /// <summary>各存储后端的用量与运行状态汇总。</summary>
     UnaryResult<StorageOverviewDto> GetOverviewAsync();
 }
