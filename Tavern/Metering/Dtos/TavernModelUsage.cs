@@ -4,10 +4,8 @@ namespace Meeko.Contracts.Tavern.Metering.Dtos;
 
 /// <summary>
 /// 一回合内单次模型调用的原始用量。倍率 / 基线 / 金额换算全在平台侧，网关只报原始数。
-/// <list type="bullet">
-///   <item><see cref="Unit"/> = token：用 <see cref="PromptTokens"/> / <see cref="CompletionTokens"/>；</item>
-///   <item>其他单位（image / audio_second / video_second）：用 <see cref="Quantity"/>（张数 / 秒数）。</item>
-/// </list>
+/// Kind / Unit 常量与 OneApi.Common（<c>UsageKinds</c> / <c>UsageUnits</c>）对齐；
+/// wire 字段仍保留 PromptTokens / CompletionTokens 命名以兼容既有 RPC。
 /// </summary>
 [MessagePackObject]
 public sealed class TavernModelUsage
@@ -24,17 +22,17 @@ public sealed class TavernModelUsage
     [Key(6)] public decimal Quantity { get; set; }
 }
 
-/// <summary>回合内模型调用类别常量。</summary>
+/// <summary>回合内模型调用类别常量（与 OneApi.Common <see cref="OneApi.Common.Usage.UsageKinds"/> 对齐；Generation 为媒体类 commit 聚合）。</summary>
 public static class TavernUsageKinds
 {
     public const string Chat = "chat";
     public const string Wake = "wake";
     public const string Embedding = "embedding";
-    /// <summary>图片 / 语音 / 视频等媒体生成调用。</summary>
+    /// <summary>图片 / 语音 / 视频等媒体生成调用（与 OneApi.Common UsageKinds.TavernGeneration 同源，值须保持 "generation"）。</summary>
     public const string Generation = "generation";
 }
 
-/// <summary>计量单位常量；平台基线表（tavern_settings 的 metering_pricing）按此 key 定价。</summary>
+/// <summary>计量单位常量（与 OneApi.Common <see cref="OneApi.Common.Usage.UsageUnits"/> 对齐）。</summary>
 public static class TavernUsageUnits
 {
     public const string Token = "token";
