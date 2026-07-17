@@ -3,7 +3,7 @@ using MessagePack;
 namespace Meeko.Contracts.Billing;
 
 /// <summary>
-/// 按幂等键批量解析 Commit 钱包流水（DemuxAi usage_logs.request_id → WalletTxn.idempotency_key）。
+/// 按幂等键批量解析 Commit 钱包流水（Demux usage_logs.request_id → WalletTxn.idempotency_key）。
 /// </summary>
 [MessagePackObject]
 public sealed class LookupCommitBillsByIdempotencyKeysResult

@@ -23,7 +23,7 @@ public sealed class BillBusinessInfo
 
     /// <summary>
     /// 产品域请求幂等键（= Commit 流水 IdempotencyKey）。产品域据此把账单流水反查回
-    /// 发起它的业务日志（如 DemuxAi 调用日志）；非 Commit 类账单为 null。
+    /// 发起它的业务日志（如 Demux 调用日志）；非 Commit 类账单为 null。
     /// </summary>
     [Key(5)] public string? RequestId { get; set; }
 
