@@ -12,4 +12,7 @@ public interface IUserAccessAuthService : IService<IUserAccessAuthService>
     UnaryResult<JwtSigningKeySet> GetJwtSigningKeysAsync();
 
     UnaryResult<bool> IsAccessTokenRevokedAsync(string jti);
+
+    /// <summary>Keystone account 域 RBAC：按角色名查 permission（Demux.Gateway 管理面鉴权）。</summary>
+    UnaryResult<bool> HasAccountPermissionAsync(string roleName, string permissionCode);
 }
