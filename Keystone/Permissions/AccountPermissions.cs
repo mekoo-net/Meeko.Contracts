@@ -3,6 +3,8 @@ namespace Meeko.Contracts.Keystone.Permissions;
 /// <summary>
 /// Account 域 IamUser 权限码（DB <c>keystone.permissions.code</c>）。
 /// 命名规则见 Meeko-Keystone.md §4.1；同时作为 API Key scope 使用。
+/// 注意：Demux 管理面权限（<see cref="DemuxPermissions"/>）属于平台 Staff 域（产品管理域），
+/// 不授予任何 Account/IAM 角色 —— 租户侧只有 self 视图（[Authorize] + 按 uid 过滤），没有管理接口。
 /// </summary>
 public static class AccountPermissions
 {
@@ -45,13 +47,12 @@ public static class AccountPermissions
         ModelsRead, ModelsWrite,
         UsageRead, UsageReadSelf,
         BillingRead, BillingWrite, BillingInvoiceDownload,
-        .. DemuxPermissions.All,
     ];
 
     /// <summary>Owner：全量权限。</summary>
     public static readonly IReadOnlyCollection<string> Owner = All;
 
-    /// <summary>Admin：除账户销毁/转让外的管理权限 + Demux 控制台全量。</summary>
+    /// <summary>Admin：除账户销毁/转让外的管理权限。</summary>
     public static readonly IReadOnlyCollection<string> Admin =
     [
         AccountRead, AccountUpdate, AccountUpgrade,
@@ -61,7 +62,6 @@ public static class AccountPermissions
         ModelsRead, ModelsWrite,
         UsageRead, UsageReadSelf,
         BillingRead, BillingWrite, BillingInvoiceDownload,
-        .. DemuxPermissions.All,
     ];
 
     /// <summary>Member：自助使用面。</summary>

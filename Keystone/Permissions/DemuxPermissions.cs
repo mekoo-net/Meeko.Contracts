@@ -1,8 +1,11 @@
 namespace Meeko.Contracts.Keystone.Permissions;
 
 /// <summary>
-/// Demux 产品控制台 permission 码（Keystone account 域 RBAC）。
-/// 命名：<c>demux:{resource}:{action}</c>，与平台通用 <see cref="AccountPermissions"/> 分离。
+/// Demux 产品管理域 permission 码（平台 Staff 域 RBAC，DB <c>keystone_staff.staff_permissions.code</c>）。
+/// Demux 管理面是跨账号的平台运营功能（用户/厂商/模型/定价/日志），只授予 Staff 角色：
+/// seed 时 SuperAdmin 授 <see cref="All"/>，ReadOnly 授 <see cref="ReadOnly"/>（见 KeystoneDevDataSeeder）。
+/// Account/IAM 域绝不授予这些码 —— 租户侧只有 self 视图（[Authorize] + 按 uid 过滤）。
+/// 命名：<c>demux:{resource}:{action}</c>，与 <see cref="StaffPermissions"/> 平台通用码分离。
 /// </summary>
 public static class DemuxPermissions
 {
