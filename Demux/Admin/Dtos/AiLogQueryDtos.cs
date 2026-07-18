@@ -306,6 +306,15 @@ public sealed class AiLogStatQuery
     [Key(4)] public DateTime ToUtc { get; set; }
 }
 
+/// <summary>时间窗内调用总量（quota / tokens / 请求数），供 legacy stat 端点单条聚合。</summary>
+[MessagePackObject]
+public sealed class AiLogStatTotalsDto
+{
+    [Key(0)] public int RequestCount { get; set; }
+    [Key(1)] public long TotalQuota { get; set; }
+    [Key(2)] public long TotalTokens { get; set; }
+}
+
 /// <summary>按供应商（供应商组）聚合的消费统计行。</summary>
 [MessagePackObject]
 public sealed class AiVendorStatDto

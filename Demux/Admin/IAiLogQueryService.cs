@@ -19,7 +19,8 @@ public interface IAiLogQueryService : IService<IAiLogQueryService>
     /// 供 BFF 把日志侧字段回填进账户自助账单列表；未命中的账单号不出现在结果里。
     /// </summary>
     UnaryResult<LogBillSummaryDto[]> ResolveLogSummariesByBillSerialsAsync(string[] billSerialNos);
-    UnaryResult<AiLogStatDto[]> StatDailyAsync(AiLogStatQuery query);
+    UnaryResult<AiLogStatDto[]> StatHourlyAsync(AiLogStatQuery query);
+    UnaryResult<AiLogStatTotalsDto> StatTotalsAsync(AiLogStatQuery query);
     UnaryResult<AiVendorStatDto[]> StatByVendorAsync(AiVendorStatQuery query);
 
     UnaryResult<ReverseAiLogResult> ReverseAsync(ReverseAiLogCommand cmd);
