@@ -10,6 +10,9 @@ public interface IBillingReferralService : IService<IBillingReferralService>
 
     UnaryResult<ListReferralRebatesResult> ListRebatesAsync(ListReferralRebatesQuery query);
 
+    /// <summary>按来源账户聚合受益人名下的返利总额（SQL 端 GROUP BY SUM），供邀请列表展示「贡献返利」。</summary>
+    UnaryResult<SumReferralRebatesBySourceResult> SumRebatesBySourceAsync(SumReferralRebatesBySourceQuery query);
+
     UnaryResult<ListReferralWithdrawalsResult> ListWithdrawalsAsync(ListReferralWithdrawalsQuery query);
 
     UnaryResult<ReferralWithdrawalDto> CreateWithdrawalAsync(CreateReferralWithdrawalCommand cmd);
