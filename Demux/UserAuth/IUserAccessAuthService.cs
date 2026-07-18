@@ -13,6 +13,9 @@ public interface IUserAccessAuthService : IService<IUserAccessAuthService>
 
     UnaryResult<bool> IsAccessTokenRevokedAsync(string jti);
 
-    /// <summary>Keystone account 域 RBAC：按角色名查 permission（Demux.Gateway 管理面鉴权）。</summary>
+    /// <summary>Keystone account 域 RBAC（如 inference:invoke）。</summary>
     UnaryResult<bool> HasAccountPermissionAsync(string roleName, string permissionCode);
+
+    /// <summary>Keystone staff 域 RBAC（Demux.Gateway /api/admin/* 鉴权，如 demux:ratelimit:read）。</summary>
+    UnaryResult<bool> HasStaffPermissionAsync(string staffRoleName, string permissionCode);
 }
