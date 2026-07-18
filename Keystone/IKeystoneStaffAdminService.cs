@@ -21,4 +21,11 @@ public interface IKeystoneStaffAdminService : IService<IKeystoneStaffAdminServic
     UnaryResult<StaffAdminCommandResult> DeleteRoleAsync(DeleteStaffRoleCommand cmd);
 
     UnaryResult<StaffPermissionDto[]> ListPermissionCatalogAsync();
+
+    /// <summary>
+    /// 产品服务（Demux/Storage/…）启动时自注册权限目录（幂等 upsert）。
+    /// 平台只存码 + 描述，不引用产品的权限常量 —— 产品域权限与 Keystone 彻底解耦。
+    /// 新码自动授予系统角色：SuperAdmin 获全部，ReadOnly 获 <c>readOnly=true</c> 子集。
+    /// </summary>
+    UnaryResult<RegisterPermissionCatalogResult> RegisterPermissionCatalogAsync(RegisterPermissionCatalogCommand cmd);
 }
