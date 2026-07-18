@@ -1,7 +1,8 @@
 namespace Meeko.Contracts.Keystone.Permissions;
 
 /// <summary>
-/// Demux 产品 permission 码（Keystone account 域 RBAC）。须与 meeko-platform 定义保持一致。
+/// Demux 产品控制台 permission 码（Keystone account 域 RBAC）。
+/// 命名：<c>demux:{resource}:{action}</c>，与平台通用 <see cref="AccountPermissions"/> 分离。
 /// </summary>
 public static class DemuxPermissions
 {
@@ -33,4 +34,27 @@ public static class DemuxPermissions
 
     public const string RateLimitRead = "demux:ratelimit:read";
     public const string RateLimitWrite = "demux:ratelimit:write";
+
+    public static readonly IReadOnlyCollection<string> All =
+    [
+        RedemptionRead, RedemptionWrite,
+        ModelsRead, ModelsWrite,
+        ProvidersRead, ProvidersWrite,
+        PricingRead, PricingWrite,
+        RoutesRead, RoutesWrite,
+        BackendsRead, BackendsWrite,
+        UsageRead, UsageWrite,
+        UsersRead, UsersWrite,
+        TasksRead,
+        RateLimitRead, RateLimitWrite,
+    ];
+
+    /// <summary>Demux 控制台只读子集（未来可赋给审计类角色）。</summary>
+    public static readonly IReadOnlyCollection<string> ReadOnly =
+    [
+        RedemptionRead,
+        ModelsRead, ProvidersRead, PricingRead, RoutesRead, BackendsRead,
+        UsageRead, UsersRead, TasksRead,
+        RateLimitRead,
+    ];
 }
