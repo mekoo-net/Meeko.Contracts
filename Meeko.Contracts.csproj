@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\common\Platform.Common\Platform.Common.csproj" />
-    <ProjectReference Include="..\..\common\Product.Common\Product.Common.csproj" />
+    <ProjectReference Include="..\..\Common\Platform.Common\Platform.Common.csproj" />
+    <ProjectReference Include="..\..\Common\Product.Common\Product.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
