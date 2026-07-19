@@ -1,0 +1,253 @@
+using System.Text.Json.Serialization;
+using Platform.Common.Web;
+using MessagePack;
+
+namespace Meeko.Contracts.Billing;
+
+[MessagePackObject]
+public sealed class VoucherTemplateDto
+{
+    [Key(0)] public required string Id { get; set; }
+    [Key(1)] public required string Name { get; set; }
+    [Key(19)] public required string Code { get; set; }
+    [Key(20)] public VoucherApplyMode ApplyMode { get; set; }
+    [Key(2)] public VoucherDeductKind DeductKind { get; set; }
+    [Key(3)] public decimal FaceValue { get; set; }
+    [Key(4)] public decimal ThresholdAmount { get; set; }
+    [Key(5)] public decimal? DiscountRate { get; set; }
+    [Key(6)] public VoucherScopeKind ScopeKind { get; set; }
+    [Key(7)] public string[] ScopeProductCodes { get; set; } = [];
+    [Key(8)] public VoucherValidityKind ValidityKind { get; set; }
+    [Key(9)] public DateTime? ValidFromUtc { get; set; }
+    [Key(10)] public DateTime? ValidToUtc { get; set; }
+    [Key(11)] public int? ValidDays { get; set; }
+    [Key(12)] public bool Stackable { get; set; }
+    [Key(13)] public int? TotalQuota { get; set; }
+    [Key(14)] public int IssuedCount { get; set; }
+    [Key(15)] public int? PerUserLimit { get; set; }
+    [Key(16)] public VoucherTemplateStatus Status { get; set; }
+    [Key(17)] public DateTime CreatedAtUtc { get; set; }
+    [Key(18)] public DateTime UpdatedAtUtc { get; set; }
+}
+
+[MessagePackObject]
+public sealed class ListVoucherTemplatesQuery
+{
+    [Key(0)] public bool IncludeArchived { get; set; }
+    [Key(1)] public int Page { get; set; } = 1;
+    [Key(2)] public int PageSize { get; set; } = 20;
+}
+
+[MessagePackObject]
+public sealed class VoucherTemplateListResult
+{
+    [Key(0)] public VoucherTemplateDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
+}
+
+[MessagePackObject]
+public sealed class CreateVoucherTemplateCommand
+{
+    [Key(0)] public required string Name { get; set; }
+    [Key(1)] public VoucherDeductKind DeductKind { get; set; }
+    [Key(14)] public VoucherApplyMode ApplyMode { get; set; }
+    [Key(2)] public decimal FaceValue { get; set; }
+    [Key(3)] public decimal ThresholdAmount { get; set; }
+    [Key(4)] public decimal? DiscountRate { get; set; }
+    [Key(5)] public VoucherScopeKind ScopeKind { get; set; }
+    [Key(6)] public string[] ScopeProductCodes { get; set; } = [];
+    [Key(7)] public VoucherValidityKind ValidityKind { get; set; }
+    [Key(8)] public DateTime? ValidFromUtc { get; set; }
+    [Key(9)] public DateTime? ValidToUtc { get; set; }
+    [Key(10)] public int? ValidDays { get; set; }
+    [Key(11)] public bool Stackable { get; set; }
+    [Key(12)] public int? TotalQuota { get; set; }
+    [Key(13)] public int? PerUserLimit { get; set; }
+}
+
+[MessagePackObject]
+public sealed class UpdateVoucherTemplateCommand
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long TemplateId { get; set; }
+
+    [Key(1)] public required string Name { get; set; }
+    [Key(2)] public VoucherScopeKind ScopeKind { get; set; }
+    [Key(3)] public string[] ScopeProductCodes { get; set; } = [];
+    [Key(4)] public VoucherValidityKind ValidityKind { get; set; }
+    [Key(5)] public DateTime? ValidFromUtc { get; set; }
+    [Key(6)] public DateTime? ValidToUtc { get; set; }
+    [Key(7)] public int? ValidDays { get; set; }
+    [Key(8)] public bool Stackable { get; set; }
+    [Key(9)] public int? TotalQuota { get; set; }
+    [Key(10)] public int? PerUserLimit { get; set; }
+}
+
+[MessagePackObject]
+public sealed class SetVoucherTemplateStatusCommand
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long TemplateId { get; set; }
+
+    [Key(1)] public VoucherTemplateStatus Status { get; set; }
+}
+
+[MessagePackObject]
+public sealed class IssueVouchersCommand
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long TemplateId { get; set; }
+
+    [Key(1)] public long[] AccountUids { get; set; } = [];
+    [Key(2)] public required string BatchToken { get; set; }
+}
+
+[MessagePackObject]
+public sealed class IssueVouchersResult
+{
+    [Key(0)] public int IssuedCount { get; set; }
+    [Key(1)] public int RequestedCount { get; set; }
+}
+
+[MessagePackObject]
+public sealed class UserVoucherDto
+{
+    [Key(0)] public required string Id { get; set; }
+
+    [Key(1)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long TemplateId { get; set; }
+
+    [Key(2)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long AccountUid { get; set; }
+
+    [Key(3)] public string? SerialNo { get; set; }
+    [Key(4)] public VoucherDeductKind DeductKind { get; set; }
+    [Key(5)] public decimal FaceValue { get; set; }
+    [Key(6)] public decimal ThresholdAmount { get; set; }
+    [Key(7)] public decimal RemainingValue { get; set; }
+    [Key(8)] public DateTime ValidFromUtc { get; set; }
+    [Key(9)] public DateTime ValidToUtc { get; set; }
+    [Key(10)] public UserVoucherStatus Status { get; set; }
+    [Key(11)] public DateTime IssuedAtUtc { get; set; }
+}
+
+[MessagePackObject]
+public sealed class ListUserVouchersQuery
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long AccountUid { get; set; }
+
+    [Key(1)] public int Page { get; set; } = 1;
+    [Key(2)] public int PageSize { get; set; } = 20;
+
+    /// <summary>按券状态筛选；缺省表示全部（含已过期）。</summary>
+    [Key(3)] public UserVoucherStatus? Status { get; set; }
+}
+
+[MessagePackObject]
+public sealed class ListUserVouchersResult
+{
+    [Key(0)] public UserVoucherDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
+
+    /// <summary>当前账户在有效期内、有余额且未使用的券张数（全量合计，不受列表筛选影响）。</summary>
+    [Key(2)] public int UsableCount { get; set; }
+
+    /// <summary>上述可用券剩余可抵扣总额（全量合计，不受列表筛选影响）。</summary>
+    [Key(3)] public decimal RemainingTotal { get; set; }
+}
+
+/// <summary>
+/// 券余额流水条目（append-only，对称于钱包 WalletTxn）。一条记录代表券的一次余额变动：
+/// 发放/预占/释放/抵扣/退回/过期/作废，由 <see cref="Kind"/> 区分，<see cref="Delta"/> 带符号、
+/// <see cref="BalanceAfter"/> 为写入后余额快照。账单相关字段（HoldId/Reference*/ProductCode/BillAmount）
+/// 仅在预占/释放/抵扣/退回类流水上有值，发放/过期/作废类为空。
+/// </summary>
+[MessagePackObject]
+public sealed class VoucherLedgerEntryDto
+{
+    [Key(0)] public required string Id { get; set; }
+
+    [Key(1)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long UserVoucherId { get; set; }
+
+    [Key(2)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long AccountUid { get; set; }
+
+    /// <summary>流水类型：发放/预占/释放/抵扣/退回/过期/作废。</summary>
+    [Key(3)] public VoucherLedgerKind Kind { get; set; }
+
+    /// <summary>带符号变动额（发放/释放/退回为正，预占/抵扣/过期/作废为负）；抵扣额取 <c>|Delta|</c>。</summary>
+    [Key(4)] public decimal Delta { get; set; }
+
+    /// <summary>本条流水写入后的券可用余额快照。</summary>
+    [Key(5)] public decimal BalanceAfter { get; set; }
+
+    [Key(6)] public DateTime OccurredAtUtc { get; set; }
+
+    /// <summary>所抵扣账单（Hold 落账单元）Id；非账单类流水为 null。</summary>
+    [Key(7)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? HoldId { get; set; }
+
+    /// <summary>账单上游引用类型（快照）。</summary>
+    [Key(8)] public WalletTxnReferenceKind ReferenceKind { get; set; }
+
+    /// <summary>账单上游引用 Id（快照），可空。</summary>
+    [Key(9)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? ReferenceId { get; set; }
+
+    /// <summary>抵扣/退回类流水关联的产品码；非账单类流水为 null。</summary>
+    [Key(10)] public string? ProductCode { get; set; }
+
+    /// <summary>该账单实付总额（快照），审计"抵扣 X / 账单 Y"；非账单类为 0。</summary>
+    [Key(11)] public decimal BillAmount { get; set; }
+
+    /// <summary>关联账单流水号（Commit WalletTxn.SerialNo），无关联账单时为 null。</summary>
+    [Key(12)] public string? BillSerial { get; set; }
+}
+
+[MessagePackObject]
+public sealed class ListVoucherLedgerResult
+{
+    [Key(0)] public VoucherLedgerEntryDto[] Items { get; set; } = [];
+}
+
+[MessagePackObject]
+public sealed class ListVoucherRedemptionsQuery
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long AccountUid { get; set; }
+
+    [Key(1)] public int Take { get; set; } = 100;
+
+    [Key(2)] public int Page { get; set; } = 1;
+
+    [Key(3)] public int PageSize { get; set; }
+
+    /// <summary>按用户券筛选；0 或缺省表示全部。</summary>
+    [Key(4)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long UserVoucherId { get; set; }
+}
+
+[MessagePackObject]
+public sealed class ListVoucherRedemptionsResult
+{
+    [Key(0)] public VoucherLedgerEntryDto[] Items { get; set; } = [];
+
+    [Key(1)] public int Total { get; set; }
+
+    /// <summary>筛选范围内累计抵扣额（全量合计，非仅当前页）。</summary>
+    [Key(2)] public decimal DeductedTotal { get; set; }
+}

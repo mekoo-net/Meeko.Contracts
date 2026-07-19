@@ -1,5 +1,5 @@
 <Project>
-  <!-- 必须在 Sdk 之前：嵌入 meeko-platform 时不继承上层 Directory.Build.props -->
+  <!-- ??? Sdk ????? meeko-platform ?????? Directory.Build.props -->
   <PropertyGroup>
     <ImportDirectoryBuildProps>false</ImportDirectoryBuildProps>
     <ImportDirectoryBuildTargets>false</ImportDirectoryBuildTargets>
@@ -8,30 +8,18 @@
   <Sdk Name="Microsoft.NET.Sdk" />
 
   <PropertyGroup>
-    <Description>Meeko cross-service contracts: MagicOnion service interfaces + MessagePack DTOs. Server and client must reference the same version.</Description>
+    <Description>Meeko cross-service contracts: MagicOnion service interfaces + MessagePack DTOs not owned by Product.Common. Product-facing RPC contracts live in common/Product.Common/Contracts and are referenced via Product.Common.</Description>
     <IsPackable>false</IsPackable>
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <!-- Monorepo layout: src/Meeko.Contracts next to src/Meeko.Common -->
-    <_MeekoCommonInMonorepo>$(MSBuildThisFileDirectory)..\Meeko.Common\Meeko.Common.csproj</_MeekoCommonInMonorepo>
   </PropertyGroup>
 
-  <!-- lib/ 仅作为独立 ProjectReference，不参与本项目的默认 Compile  glob -->
   <ItemGroup>
-    <Compile Remove="lib\**\*.cs" />
-  </ItemGroup>
-
-  <!-- Standalone (submodule in ProxyGateway, etc.): minimal JSON converters -->
-  <ItemGroup Condition="!Exists('$(_MeekoCommonInMonorepo)')">
-    <ProjectReference Include="lib\Meeko.Common.Web\Meeko.Common.Web.csproj" />
-  </ItemGroup>
-
-  <!-- meeko-platform monorepo: reuse full Meeko.Common -->
-  <ItemGroup Condition="Exists('$(_MeekoCommonInMonorepo)')">
-    <ProjectReference Include="$(_MeekoCommonInMonorepo)" />
+    <ProjectReference Include="..\..\common\Platform.Common\Platform.Common.csproj" />
+    <ProjectReference Include="..\..\common\Product.Common\Product.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,3 +28,4 @@
   </ItemGroup>
 
 </Project>
+
