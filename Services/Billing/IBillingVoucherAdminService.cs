@@ -49,4 +49,7 @@ public interface IBillingVoucherAdminService : IService<IBillingVoucherAdminServ
     UnaryResult<VoucherActivityDto> SetActivityStatusAsync(SetVoucherActivityStatusCommand cmd);
 
     UnaryResult<ActivityClaimersResult> ListActivityClaimersAsync(ListActivityClaimersQuery query);
+
+    /// <summary>按券模板列出已发券（下发给了谁）。</summary>
+    UnaryResult<TemplateIssuedResult> ListTemplateIssuedAsync(ListTemplateIssuedQuery query);
 }

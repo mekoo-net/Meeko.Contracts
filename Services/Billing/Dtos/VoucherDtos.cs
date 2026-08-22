@@ -136,6 +136,53 @@ public sealed class UserVoucherDto
     [Key(11)] public DateTime IssuedAtUtc { get; set; }
 }
 
+/// <summary>某券模板的一张已发券（含发放来源）。账户联系信息由 Bff 按当前页 uid 批量补全。</summary>
+[MessagePackObject]
+public sealed class IssuedVoucherDto
+{
+    [Key(0)] public required string Id { get; set; }
+
+    [Key(1)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long AccountUid { get; set; }
+
+    [Key(2)] public string? SerialNo { get; set; }
+    [Key(3)] public decimal FaceValue { get; set; }
+    [Key(4)] public decimal RemainingValue { get; set; }
+    [Key(5)] public UserVoucherStatus Status { get; set; }
+    [Key(6)] public DateTime IssuedAtUtc { get; set; }
+    [Key(7)] public DateTime ValidToUtc { get; set; }
+
+    /// <summary>发券来源不透明标记（如 activity:50 / grant:70）；后台下发为 null。</summary>
+    [Key(8)] public string? Origin { get; set; }
+
+    /// <summary>账户联系信息，由 Bff 按当前页 uid 批量补全（Billing 侧留空）。</summary>
+    [Key(9)] public Meeko.Contracts.Keystone.AccountContactDto? Contact { get; set; }
+}
+
+[MessagePackObject]
+public sealed class ListTemplateIssuedQuery
+{
+    [Key(0)]
+    [JsonConverter(typeof(LongToStringConverter))]
+    public long TemplateId { get; set; }
+
+    [Key(1)]
+    [JsonConverter(typeof(NullableLongToStringConverter))]
+    public long? AccountUid { get; set; }
+
+    [Key(2)] public UserVoucherStatus? Status { get; set; }
+    [Key(3)] public int Page { get; set; } = 1;
+    [Key(4)] public int PageSize { get; set; } = 20;
+}
+
+[MessagePackObject]
+public sealed class TemplateIssuedResult
+{
+    [Key(0)] public IssuedVoucherDto[] Items { get; set; } = [];
+    [Key(1)] public int Total { get; set; }
+}
+
 [MessagePackObject]
 public sealed class ListUserVouchersQuery
 {
