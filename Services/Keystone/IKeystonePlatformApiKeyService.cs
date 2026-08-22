@@ -10,7 +10,7 @@ public interface IKeystonePlatformApiKeyService : IService<IKeystonePlatformApiK
     UnaryResult<PlatformApiKeyListResult> ListAsync(ListPlatformApiKeysQuery query);
     UnaryResult<IssuePlatformApiKeyResult> IssueAsync(IssuePlatformApiKeyCommand cmd);
     UnaryResult<PlatformApiKeyCommandResult> RevokeAsync(RevokePlatformApiKeyCommand cmd);
-    /// <summary>可开通的现有接口（<c>METHOD /path</c>），不是独立权限码。</summary>
+    /// <summary>可开通的 Staff 权限码（与角色目录同一份）。</summary>
     UnaryResult<string[]> ListScopeCatalogAsync();
 }
 
@@ -30,7 +30,7 @@ public sealed class PlatformApiKeyDto
 
     [Key(1)] public string Name { get; set; } = string.Empty;
     [Key(2)] public string KeyHint { get; set; } = string.Empty;
-    /// <summary>已开通的接口路径。</summary>
+    /// <summary>已开通的 Staff 权限码。</summary>
     [Key(3)] public string[] Scopes { get; set; } = [];
     [Key(4)]
     [JsonConverter(typeof(LongToStringConverter))]
@@ -53,7 +53,7 @@ public sealed class PlatformApiKeyListResult
 public sealed class IssuePlatformApiKeyCommand
 {
     [Key(0)] public string Name { get; set; } = string.Empty;
-    /// <summary>要开通的接口路径。</summary>
+    /// <summary>要开通的 Staff 权限码。</summary>
     [Key(1)] public string[] Scopes { get; set; } = [];
     [Key(2)] public DateTime? ExpiresAtUtc { get; set; }
     [Key(3)]
@@ -101,3 +101,4 @@ public sealed class PlatformApiKeyCommandResult
     public static PlatformApiKeyCommandResult Fail(string code, string message)
         => new() { Success = false, FailureCode = code, FailureMessage = message };
 }
+
