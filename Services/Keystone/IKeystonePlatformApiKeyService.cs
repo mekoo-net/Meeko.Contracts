@@ -10,8 +10,8 @@ public interface IKeystonePlatformApiKeyService : IService<IKeystonePlatformApiK
     UnaryResult<PlatformApiKeyListResult> ListAsync(ListPlatformApiKeysQuery query);
     UnaryResult<IssuePlatformApiKeyResult> IssueAsync(IssuePlatformApiKeyCommand cmd);
     UnaryResult<PlatformApiKeyCommandResult> RevokeAsync(RevokePlatformApiKeyCommand cmd);
+    /// <summary>可开通的现有接口（<c>METHOD /path</c>），不是独立权限码。</summary>
     UnaryResult<string[]> ListScopeCatalogAsync();
-    UnaryResult<ResolveAccountResult> ResolveAccountAsync(ResolveAccountQuery query);
 }
 
 [MessagePackObject]
@@ -30,6 +30,7 @@ public sealed class PlatformApiKeyDto
 
     [Key(1)] public string Name { get; set; } = string.Empty;
     [Key(2)] public string KeyHint { get; set; } = string.Empty;
+    /// <summary>已开通的接口路径。</summary>
     [Key(3)] public string[] Scopes { get; set; } = [];
     [Key(4)]
     [JsonConverter(typeof(LongToStringConverter))]
@@ -52,6 +53,7 @@ public sealed class PlatformApiKeyListResult
 public sealed class IssuePlatformApiKeyCommand
 {
     [Key(0)] public string Name { get; set; } = string.Empty;
+    /// <summary>要开通的接口路径。</summary>
     [Key(1)] public string[] Scopes { get; set; } = [];
     [Key(2)] public DateTime? ExpiresAtUtc { get; set; }
     [Key(3)]
@@ -97,41 +99,5 @@ public sealed class PlatformApiKeyCommandResult
     public static PlatformApiKeyCommandResult Ok() => new() { Success = true };
 
     public static PlatformApiKeyCommandResult Fail(string code, string message)
-        => new() { Success = false, FailureCode = code, FailureMessage = message };
-}
-
-[MessagePackObject]
-public sealed class ResolveAccountQuery
-{
-    /// <summary>邮箱，或 IamUser / Account 的 Uid（同一字符串，调用方不用分字段）。</summary>
-    [Key(0)] public string Query { get; set; } = string.Empty;
-}
-
-[MessagePackObject]
-public sealed class ResolveAccountResult
-{
-    [Key(0)] public bool Success { get; set; }
-    [Key(1)] public string? FailureCode { get; set; }
-    [Key(2)] public string? FailureMessage { get; set; }
-
-    [Key(3)]
-    [JsonConverter(typeof(LongToStringConverter))]
-    public long AccountUid { get; set; }
-
-    [Key(4)] public string? AccountType { get; set; }
-    [Key(5)] public string? Status { get; set; }
-    [Key(6)] public string? DisplayName { get; set; }
-
-    public static ResolveAccountResult Ok(long accountUid, string accountType, string status, string displayName)
-        => new()
-        {
-            Success = true,
-            AccountUid = accountUid,
-            AccountType = accountType,
-            Status = status,
-            DisplayName = displayName,
-        };
-
-    public static ResolveAccountResult Fail(string code, string message)
         => new() { Success = false, FailureCode = code, FailureMessage = message };
 }
