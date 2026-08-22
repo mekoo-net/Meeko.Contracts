@@ -15,6 +15,9 @@ public static class StaffPermissions
     public const string PlatformSettingsRead = "platform.settings.read";
     public const string PlatformSettingsWrite = "platform.settings.write";
 
+    public const string PlatformApiKeyRead = "platform.apikey.read";
+    public const string PlatformApiKeyWrite = "platform.apikey.write";
+
     public const string NoticeTemplateRead = "notice.template.read";
     public const string NoticeTemplateWrite = "notice.template.write";
 
@@ -46,6 +49,7 @@ public static class StaffPermissions
         PlatformStaffRead, PlatformStaffWrite,
         PlatformRoleRead, PlatformRoleWrite,
         PlatformSettingsRead, PlatformSettingsWrite,
+        PlatformApiKeyRead, PlatformApiKeyWrite,
         NoticeTemplateRead, NoticeTemplateWrite,
         NoticeChannelRead, NoticeChannelWrite,
         BillingRechargeRead, BillingRechargeWrite,
@@ -63,6 +67,7 @@ public static class StaffPermissions
         PlatformStaffRead,
         PlatformRoleRead,
         PlatformSettingsRead,
+        PlatformApiKeyRead,
         NoticeTemplateRead,
         NoticeChannelRead,
         BillingRechargeRead,
