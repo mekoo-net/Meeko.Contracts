@@ -8,7 +8,7 @@ namespace Meeko.Contracts.Billing.Redemptions;
 /// </summary>
 public interface IBillingRedemptionService : IService<IBillingRedemptionService>
 {
-    /// <summary>兑换入口是否开放及说明文案；兑换码渠道停用时入口关闭。</summary>
+    /// <summary>兑换入口是否开放及发卡网；兑换码渠道停用时入口关闭。</summary>
     UnaryResult<RedemptionEntryDto> GetEntryAsync();
 
     UnaryResult<RedemptionReceiptDto> RedeemAsync(RedeemCodeCommand cmd);
