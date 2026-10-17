@@ -11,7 +11,7 @@ public sealed class RedemptionBatchDto
     [Key(2)] public string? SalesChannel { get; set; }
 
     /// <summary>入账途径；Key 顺延，声明就近放在销售渠道旁。</summary>
-    [Key(12)] public RedemptionPurpose Purpose { get; set; }
+    [Key(15)] public RedemptionPurpose Purpose { get; set; }
 
     [Key(3)] public decimal FaceValue { get; set; }
     [Key(4)] public int Quantity { get; set; }
@@ -21,5 +21,6 @@ public sealed class RedemptionBatchDto
     [Key(8)] public RedemptionBatchStatus Status { get; set; }
     [Key(9)] public required string CodePattern { get; set; }
     [Key(10)] public int? PerAccountLimit { get; set; }
-    [Key(11)] public DateTime CreatedAtUtc { get; set; }
+    // Key(11)–Key(13) 曾是生效 / 失效时间与创建人，已撤掉；空着不复用，否则未升级的一端会把旧值读进别的字段。
+    [Key(14)] public DateTime CreatedAtUtc { get; set; }
 }

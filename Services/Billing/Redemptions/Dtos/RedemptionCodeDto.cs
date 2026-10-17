@@ -21,5 +21,6 @@ public sealed class RedemptionCodeDto
     /// <summary>命中这张卡的失败提交次数；已兑换后仍被他人提交，多半是转卖或外泄。</summary>
     [Key(7)] public int FailedAttempts { get; set; }
 
-    [Key(8)] public DateTime CreatedAtUtc { get; set; }
+    // Key(8) 曾是失效时间、Key(10) 曾是冻结 / 作废原因，已撤掉；空着不复用。
+    [Key(9)] public DateTime CreatedAtUtc { get; set; }
 }
