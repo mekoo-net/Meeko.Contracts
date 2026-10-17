@@ -36,6 +36,10 @@ public static class StaffPermissions
     public const string BillingVoucherRead = "billing.voucher.read";
     public const string BillingVoucherWrite = "billing.voucher.write";
 
+    /// <summary>兑换码（卡密）。写权限含导出明文卡密，授予时按资金权限对待。</summary>
+    public const string BillingRedemptionRead = "billing.redemption.read";
+    public const string BillingRedemptionWrite = "billing.redemption.write";
+
     public const string AccountAdminRead = "account.admin.read";
     public const string AccountAdminWrite = "account.admin.write";
 
@@ -56,6 +60,7 @@ public static class StaffPermissions
         BillingBillRead, BillingBillWrite,
         BillingChannelRead, BillingChannelWrite,
         BillingVoucherRead, BillingVoucherWrite,
+        BillingRedemptionRead, BillingRedemptionWrite,
         AccountAdminRead, AccountAdminWrite,
         StorageBackendRead, StorageBackendWrite,
     ];
@@ -74,6 +79,7 @@ public static class StaffPermissions
         BillingBillRead,
         BillingChannelRead,
         BillingVoucherRead,
+        BillingRedemptionRead,
         AccountAdminRead,
         StorageBackendRead,
     ];

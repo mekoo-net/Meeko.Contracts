@@ -1,7 +1,7 @@
 namespace Meeko.Contracts.Messaging;
 
 /// <summary>
-/// 充值成功集成事件。仅由真正的充值发布（手工充值 / 三方支付），由 Billing 内部消费者（推荐返利、自动发券）订阅。
+/// 充值成功集成事件。仅由真正的充值发布（三方支付 / 手工充值 / 兑换码），由 Billing 内部消费者（推荐返利、自动发券）订阅。
 /// 经 MassTransit + RabbitMQ 投递，发布方使用 EF 事务型 outbox 保证与入账同事务。
 /// </summary>
 public sealed record RechargeSucceeded
