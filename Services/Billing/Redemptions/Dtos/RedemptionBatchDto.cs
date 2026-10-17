@@ -11,7 +11,7 @@ public sealed class RedemptionBatchDto
     [Key(2)] public string? SalesChannel { get; set; }
 
     /// <summary>入账途径；Key 顺延，声明就近放在销售渠道旁。</summary>
-    [Key(17)] public RedemptionPurpose Purpose { get; set; }
+    [Key(15)] public RedemptionPurpose Purpose { get; set; }
 
     [Key(3)] public decimal FaceValue { get; set; }
     [Key(4)] public int Quantity { get; set; }
@@ -23,8 +23,6 @@ public sealed class RedemptionBatchDto
     [Key(10)] public int? PerAccountLimit { get; set; }
     [Key(11)] public DateTime? StartsAtUtc { get; set; }
     [Key(12)] public DateTime? ExpiresAtUtc { get; set; }
-    [Key(13)] public int ExportCount { get; set; }
-    [Key(14)] public DateTime? LastExportedAtUtc { get; set; }
-    [Key(15)] public required RedemptionStaffRefDto CreatedBy { get; set; }
-    [Key(16)] public DateTime CreatedAtUtc { get; set; }
+    [Key(13)] public required RedemptionStaffRefDto CreatedBy { get; set; }
+    [Key(14)] public DateTime CreatedAtUtc { get; set; }
 }

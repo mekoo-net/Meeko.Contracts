@@ -20,14 +20,12 @@ public interface IBillingRedemptionAdminService : IService<IBillingRedemptionAdm
     /// <summary>下拉选项用：全部批次的轻量列表，按创建时间倒序。</summary>
     UnaryResult<RedemptionBatchOptionDto[]> ListBatchOptionsAsync();
 
-    /// <summary>批次操作记录，按时间倒序。</summary>
-    UnaryResult<RedemptionBatchEventDto[]> ListBatchEventsAsync(string batchId);
-
     UnaryResult<RedemptionBatchCodesDto> CreateBatchAsync(CreateRedemptionBatchCommand cmd);
 
     /// <summary>编辑批次；数量增加时生成新卡密，<c>Codes</c> 只含本次追加的明文。</summary>
     UnaryResult<RedemptionBatchCodesDto> UpdateBatchAsync(UpdateRedemptionBatchCommand cmd);
 
+    /// <summary>按范围取明文卡密。只读，不改批次。</summary>
     UnaryResult<RedemptionExportDto> ExportBatchAsync(ExportRedemptionBatchCommand cmd);
 
     UnaryResult<RedemptionBatchDto> SetBatchFrozenAsync(SetRedemptionBatchFrozenCommand cmd);

@@ -6,6 +6,7 @@ namespace Meeko.Contracts.Billing.Redemptions;
 public sealed class VoidRedemptionBatchCommand
 {
     [Key(0)] public required string BatchId { get; set; }
+
+    /// <summary>作废原因，记在被作废的卡上。</summary>
     [Key(1)] public required string Reason { get; set; }
-    [Key(2)] public long OperatorStaffUid { get; set; }
 }

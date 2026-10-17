@@ -6,6 +6,7 @@ namespace Meeko.Contracts.Billing.Redemptions;
 public sealed class VoidRedemptionCodeCommand
 {
     [Key(0)] public long CodeId { get; set; }
+
+    /// <summary>作废原因，记在卡上。</summary>
     [Key(1)] public required string Reason { get; set; }
-    [Key(2)] public long OperatorStaffUid { get; set; }
 }

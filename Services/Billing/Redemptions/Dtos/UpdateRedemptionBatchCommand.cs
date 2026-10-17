@@ -13,5 +13,4 @@ public sealed class UpdateRedemptionBatchCommand
     [Key(4)] public int? PerAccountLimit { get; set; }
     [Key(5)] public DateTime? StartsAtUtc { get; set; }
     [Key(6)] public DateTime? ExpiresAtUtc { get; set; }
-    [Key(7)] public long OperatorStaffUid { get; set; }
 }
