@@ -8,8 +8,7 @@ public enum RedemptionAttemptResult : short
     AlreadyRedeemed = 2,
     Frozen = 3,
     Voided = 4,
-    Expired = 5,
-    NotStarted = 6,
+    // 5、6 曾是已过期 / 未生效（兑换码已改为永久有效）。数值已落库，不要复用。
     LimitExceeded = 7,
     RateLimited = 8,
 }

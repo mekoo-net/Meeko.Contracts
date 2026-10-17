@@ -9,7 +9,7 @@ public sealed class CreateRedemptionBatchCommand
     [Key(1)] public string? SalesChannel { get; set; }
 
     /// <summary>入账途径，生成后不可改；Key 顺延，声明就近放在销售渠道旁。</summary>
-    [Key(9)] public RedemptionPurpose Purpose { get; set; }
+    [Key(6)] public RedemptionPurpose Purpose { get; set; }
 
     [Key(2)] public decimal FaceValue { get; set; }
     [Key(3)] public int Quantity { get; set; }
@@ -18,7 +18,4 @@ public sealed class CreateRedemptionBatchCommand
     [Key(4)] public string? Prefix { get; set; }
 
     [Key(5)] public int? PerAccountLimit { get; set; }
-    [Key(6)] public DateTime? StartsAtUtc { get; set; }
-    [Key(7)] public DateTime? ExpiresAtUtc { get; set; }
-    [Key(8)] public long OperatorStaffUid { get; set; }
 }

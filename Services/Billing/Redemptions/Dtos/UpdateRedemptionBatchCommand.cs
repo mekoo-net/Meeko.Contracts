@@ -11,6 +11,4 @@ public sealed class UpdateRedemptionBatchCommand
     [Key(2)] public string? SalesChannel { get; set; }
     [Key(3)] public int Quantity { get; set; }
     [Key(4)] public int? PerAccountLimit { get; set; }
-    [Key(5)] public DateTime? StartsAtUtc { get; set; }
-    [Key(6)] public DateTime? ExpiresAtUtc { get; set; }
 }

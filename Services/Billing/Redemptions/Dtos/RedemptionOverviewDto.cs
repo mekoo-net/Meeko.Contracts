@@ -11,7 +11,7 @@ public sealed class RedemptionOverviewDto
     [Key(3)] public int RedeemedCount { get; set; }
     [Key(4)] public decimal RedeemedValue { get; set; }
 
-    /// <summary>仍可兑换（批次生效中且未过期）的卡密：已卖出未兑即平台预收负债。</summary>
+    /// <summary>仍可兑换（批次生效中）的卡密：已卖出未兑即平台预收负债。</summary>
     [Key(5)] public int OutstandingCount { get; set; }
     [Key(6)] public decimal OutstandingValue { get; set; }
     [Key(7)] public int TodayRedeemedCount { get; set; }
